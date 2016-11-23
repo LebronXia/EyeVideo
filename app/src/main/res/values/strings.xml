@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">EyeVideo</string>
+    <string name="scale_up_show_behavior">com.example.xiaobozheng.eyevideo.ui.support.ScaleUpShowBehavior</string>
+    <string name="scale_down_show_behavior">com.example.xiaobozheng.eyevideo.ui.support.ScaleDownShowBehavior</string>
 </resources>

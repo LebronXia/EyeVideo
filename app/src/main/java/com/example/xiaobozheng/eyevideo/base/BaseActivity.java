@@ -24,11 +24,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        mContext = this;
+        ButterKnife.bind(this);
         mCommonToolbar = ButterKnife.findById(this, R.id.common_toolbar);
         if (mCommonToolbar != null){
             initToolBar();
             setSupportActionBar(mCommonToolbar);
         }
+
         initDatas();
         initViews();
 
@@ -43,4 +46,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract void initDatas();
 
     public abstract void initViews();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+       // dismissDialog();
+    }
 }
