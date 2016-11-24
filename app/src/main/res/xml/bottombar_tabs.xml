@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs >
+    <tab
+        id="@+id/tab_favorites"
+        icon="@mipmap/ic_launcher"
+        title="精选" />
+    <tab
+        id="@+id/tab_nearby"
+        icon="@mipmap/ic_launcher"
+        title="发现" />
+
+</tabs>

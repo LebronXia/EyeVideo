@@ -17,37 +17,32 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleview"
+    <FrameLayout
+        android:id="@+id/frame_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
-    </android.support.v7.widget.RecyclerView>
-    
-    <LinearLayout
+    </FrameLayout>
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/recycleview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+        <!--&gt;-->
+
+    <!--</android.support.v7.widget.RecyclerView>-->
+
+    <com.roughike.bottombar.BottomBar
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:layout_alignParentBottom="true"
         android:background="@android:color/white"
         app:layout_behavior="@string/bottom_sheet_behavior"
-        >
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="精选"
-            />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="发现"
-            />
-    </LinearLayout>
+        app:bb_tabXmlResource="@xml/bottombar_tabs"
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

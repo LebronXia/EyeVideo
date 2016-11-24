@@ -46,4 +46,5 @@ dependencies {
     // Bus
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    compile 'com.roughike:bottom-bar:2.0.2'
 }
