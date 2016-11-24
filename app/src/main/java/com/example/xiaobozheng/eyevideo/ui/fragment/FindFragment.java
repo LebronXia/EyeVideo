@@ -3,24 +3,23 @@ package com.example.xiaobozheng.eyevideo.ui.fragment;
 import com.example.xiaobozheng.eyevideo.R;
 
 /**
- * 精选页面
- * Created by xiaobozheng on 11/24/2016.
+ * Created by Riane on 2016/11/25.
  */
 
-public class ChoiceFragment extends BaseFragment{
+public class FindFragment extends BaseFragment {
+
+    @Override
+    public void attachView() {
+
+    }
 
     @Override
     public int getLayoutResId() {
-        return R.layout.fragment_choice;
+        return R.layout.fragment_find;
     }
 
     @Override
     protected void setupActivityComponent() {
-
-    }
-
-    @Override
-    public void attachView() {
 
     }
 
