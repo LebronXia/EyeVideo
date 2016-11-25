@@ -33,7 +33,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
         initDatas();
-        initViews();
+        initViews(savedInstanceState);
 
     }
 
@@ -45,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public abstract void initDatas();
 
-    public abstract void initViews();
+    public abstract void initViews(Bundle savedInstanceState);
 
     @Override
     protected void onDestroy() {

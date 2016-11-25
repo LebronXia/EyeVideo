@@ -6,4 +6,5 @@
 
 
     <color name="reader_menu_bg_color">#191919</color>
+    <color name="item_background">#55000000</color>
 </resources>

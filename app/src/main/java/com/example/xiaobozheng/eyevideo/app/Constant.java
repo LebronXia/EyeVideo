@@ -6,4 +6,6 @@ package com.example.xiaobozheng.eyevideo.app;
 
 public class Constant {
 
+    public static final String BASE_URL = "http://baobab.kaiyanapp.com/api/";
+
 }

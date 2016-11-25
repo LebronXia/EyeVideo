@@ -1,5 +1,7 @@
 package com.example.xiaobozheng.eyevideo.ui.activity;
 
+import android.os.Bundle;
+
 import com.example.xiaobozheng.eyevideo.base.BaseActivity;
 
 /**
@@ -28,7 +30,7 @@ public class SplashActivity extends BaseActivity{
     }
 
     @Override
-    public void initViews() {
+    public void initViews(Bundle savedInstanceState) {
 
     }
 }

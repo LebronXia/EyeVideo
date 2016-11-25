@@ -1,6 +1,7 @@
 package com.example.xiaobozheng.eyevideo.ui.fragment;
 
 import com.example.xiaobozheng.eyevideo.R;
+import com.example.xiaobozheng.eyevideo.base.BaseFragment;
 
 /**
  * Created by Riane on 2016/11/25.

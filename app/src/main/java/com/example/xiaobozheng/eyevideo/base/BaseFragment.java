@@ -1,4 +1,4 @@
-package com.example.xiaobozheng.eyevideo.ui.fragment;
+package com.example.xiaobozheng.eyevideo.base;
 
 import android.app.Activity;
 import android.content.Context;

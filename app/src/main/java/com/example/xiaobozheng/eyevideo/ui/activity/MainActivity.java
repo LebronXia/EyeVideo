@@ -1,27 +1,20 @@
 package com.example.xiaobozheng.eyevideo.ui.activity;
 
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.Switch;
 
 import com.example.xiaobozheng.eyevideo.R;
 import com.example.xiaobozheng.eyevideo.base.BaseActivity;
-import com.example.xiaobozheng.eyevideo.ui.adapter.ListRecyclerAdapter;
 import com.example.xiaobozheng.eyevideo.ui.fragment.ChoiceFragment;
 import com.example.xiaobozheng.eyevideo.ui.fragment.FindFragment;
 import com.example.xiaobozheng.eyevideo.ui.support.ScaleDownShowBehavior;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -29,6 +22,8 @@ import butterknife.Bind;
 public class MainActivity extends BaseActivity {
     @Bind(R.id.fab)
     FloatingActionButton mFloatingActionButton;
+    @Bind(R.id.tab_layout)
+    BottomBar mBottomBar;
     private LinearLayoutManager linearLayoutManager;
     private List<String> list;
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -60,20 +55,31 @@ public class MainActivity extends BaseActivity {
 //            list.add("我是第" + i + "个");
 //        }
 
-
     }
 
     @Override
-    public void initViews() {
+    public void initViews(Bundle savedInstanceState) {
 //        ScaleDownShowBehavior scaleDownShowFab = ScaleDownShowBehavior.from(mFloatingActionButton);
 //        scaleDownShowFab.setOnStateChangedListener(onStateChangedListener);
-//        mBottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.tab_layout));
+          mBottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.tab_layout));
 //        recyclerView.setHasFixedSize(true);
 //        linearLayoutManager = new LinearLayoutManager(this);
 //        linearLayoutManager.setSmoothScrollbarEnabled(true);
 //        recyclerView.setLayoutManager(linearLayoutManager);
 //        ListRecyclerAdapter adapter = new ListRecyclerAdapter(list);
 //        recyclerView.setAdapter(adapter);
+        //初始化Fragment
+        initFragment(savedInstanceState);
+        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                if (tabId == R.id.tab_choice){
+                    SwitchTo(0);
+                } else if (tabId == R.id.tab_find){
+                    SwitchTo(1);
+                }
+            }
+        });
     }
 
     /**
@@ -94,6 +100,7 @@ public class MainActivity extends BaseActivity {
             transaction.add(R.id.frame_content, mFindFragment, "findFragment");
         }
         transaction.commit();
+        SwitchTo(currentTabPosition);
 
     }
 
@@ -103,6 +110,21 @@ public class MainActivity extends BaseActivity {
      */
     private void SwitchTo(int position){
 
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        switch (position){
+            //精选
+            case 0:
+                transaction.hide(mFindFragment);
+                transaction.show(mChoiceFragment);
+                transaction.commitAllowingStateLoss();
+                break;
+            //发现
+            case 1:
+                transaction.hide(mChoiceFragment);
+                transaction.show(mFindFragment);
+                transaction.commitAllowingStateLoss();
+                break;
+        }
     }
 
     private ScaleDownShowBehavior.OnStateChangedListener onStateChangedListener = new ScaleDownShowBehavior.OnStateChangedListener() {
