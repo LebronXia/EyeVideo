@@ -41,6 +41,7 @@ public abstract class BaseRVFragment<T1 extends BaseContract.BasePresenter, T2> 
     public void attachView() {
         if (mPresenter != null)
             mPresenter.attachView(this);
+
     }
 
     protected void initAdapter(boolean refreshable, boolean loadmoreable) {

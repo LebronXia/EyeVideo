@@ -8,12 +8,18 @@ import com.example.xiaobozheng.eyevideo.base.BaseFragment;
 import com.example.xiaobozheng.eyevideo.base.BaseRVFragment;
 import com.example.xiaobozheng.eyevideo.injection.component.AppComponent;
 import com.example.xiaobozheng.eyevideo.injection.component.DaggerMianVideoComponent;
+import com.example.xiaobozheng.eyevideo.model.Category;
 import com.example.xiaobozheng.eyevideo.model.Daily;
 import com.example.xiaobozheng.eyevideo.ui.contract.ChoiceVideoContract;
 import com.example.xiaobozheng.eyevideo.ui.presenter.ChoicePresenter;
 import com.example.xiaobozheng.eyevideo.util.LogUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
+import me.drakeet.multitype.Item;
+import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * 精选页面
@@ -22,7 +28,9 @@ import butterknife.Bind;
 
 public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, Daily> implements ChoiceVideoContract.View{
 
+    private List<Item> mItems;
     private String dateTime = "";
+    private MultiTypeAdapter mAdapter;
 
     @Override
     public int getLayoutResId() {
@@ -37,25 +45,32 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, Daily> imple
                 .inject(this);
     }
 
-    @Override
-    public void attachView() {
-
-    }
 
     @Override
     public void initDatas() {
+        mItems = new ArrayList<Item>();
         mPresenter.getChoiceDailyData();
     }
 
     @Override
     public void initView() {
 
+        mAdapter = new MultiTypeAdapter(mItems);
+
     }
 
     @Override
     public void showChoiceDailyData(Daily daily) {
+        //将数据置于同一个item数列中
+        for (Daily.IssueList issueList:daily.issueList){
+            String date = issueList.itemlist.get(0).data.text;
+            mItems.add(new Category( date == null ?  "Today" : date));
+            mItems.addAll(issueList.itemlist);
+        }
+        String nextPageUrl = daily.nextPageUrl;
+        dateTime = nextPageUrl.substring(nextPageUrl.indexOf("=") + 1, nextPageUrl.indexOf("&"));
 
-        LogUtils.d(daily.issueList.size()+ "数量~~~");
+
     }
 
     @Override

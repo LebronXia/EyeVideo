@@ -9,5 +9,6 @@ import dagger.Component;
  */
 @Component(dependencies = AppComponent.class)
 public interface MianVideoComponent {
+
     ChoiceFragment inject(ChoiceFragment choiceFragment);
 }

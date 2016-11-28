@@ -48,4 +48,8 @@ dependencies {
     // Bus
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.roughike:bottom-bar:2.0.2'
+    //复杂的列表试图
+    compile('me.drakeet.multitype:multitype:2.2.1', {
+        exclude group: 'com.android.support'
+    })
 }

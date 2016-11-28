@@ -13,6 +13,7 @@
         >
 
         <com.example.xiaobozheng.eyevideo.widget.RatioImageView
+            android:id="@+id/riv_movie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
@@ -29,6 +30,7 @@
             >
 
             <TextView
+                android:id="@+id/tv_movietitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="消费时代：大女孩的玩具"
@@ -38,6 +40,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_movietype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="#记录 / 16'21''"
