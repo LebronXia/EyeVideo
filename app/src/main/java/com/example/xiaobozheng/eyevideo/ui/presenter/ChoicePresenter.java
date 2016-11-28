@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by xiaobozheng on 11/25/2016.
@@ -27,6 +28,33 @@ public class ChoicePresenter extends BaseRxPresenter<ChoiceVideoContract.View> i
     @Override
     public void getChoiceDailyData(long date) {
         Subscription rxSubscription = mApi.getDaily(date)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Daily>() {
+                    @Override
+                    public void onCompleted() {
+                        mView.complete();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.showError();
+                    }
+
+                    @Override
+                    public void onNext(Daily daily) {
+                        mView.showChoiceDailyData(daily);
+                    }
+                });
+        addSubscrebe(rxSubscription);
+    }
+
+    @Override
+    public void getChoiceDailyData() {
+        Subscription rxSubscription = mApi.getDaily()
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Daily>() {
                     @Override

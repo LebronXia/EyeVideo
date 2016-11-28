@@ -34,7 +34,7 @@ public class EyeVideoApplication extends Application {
         return sInstance;
     }
 
-    private AppComponent getAppComponent(){
+    public AppComponent getAppComponent(){
         return appComponent;
     }
 }

@@ -11,6 +11,7 @@ public class Data implements Parcelable {
     public String dataType;
     public int id;
     public String title;
+    //日期
     public String text;
     public String description;
     public String category;

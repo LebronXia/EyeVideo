@@ -14,5 +14,7 @@ public interface ChoiceVideoContract {
 
     interface Presenter extends BaseContract.BasePresenter<View>{
         void getChoiceDailyData(long date);
+
+        void getChoiceDailyData();
     }
 }

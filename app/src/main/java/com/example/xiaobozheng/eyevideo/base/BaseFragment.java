@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.xiaobozheng.eyevideo.app.EyeVideoApplication;
+import com.example.xiaobozheng.eyevideo.injection.component.AppComponent;
 import com.example.xiaobozheng.eyevideo.widget.loadding.CustomDialog;
 
 import butterknife.ButterKnife;
@@ -29,7 +31,7 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract int getLayoutResId();
 
-    protected abstract void setupActivityComponent();
+    protected abstract void setupActivityComponent(AppComponent appComponent);
 
     @Nullable
     @Override
@@ -45,7 +47,7 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        setupActivityComponent();
+        setupActivityComponent(EyeVideoApplication.getsInstance().getAppComponent());
         attachView();
         initDatas();
         initView();

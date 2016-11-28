@@ -20,11 +20,13 @@ public class Api {
 
     public Api(OkHttpClient okHttpClient){
         Retrofit retrofit = new Retrofit.Builder()
+                .client(okHttpClient)
                 .baseUrl(Constant.BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())  //添加Rx适配器
                 .addConverterFactory(GsonConverterFactory.create())     //添加Gson适配器
-                .client(okHttpClient)
                 .build();
+
+        mApiService = retrofit.create(ApiService.class);
     }
 
     public static Api getInstance(OkHttpClient okHttpClient){
@@ -41,5 +43,13 @@ public class Api {
      */
     public Observable<Daily> getDaily(long date){
         return mApiService.getDaily(date);
+    }
+
+    /**
+     * 获取当天的视频
+     * @return
+     */
+    public Observable<Daily> getDaily(){
+        return mApiService.getDaily();
     }
 }

@@ -2,6 +2,7 @@ package com.example.xiaobozheng.eyevideo.ui.fragment;
 
 import com.example.xiaobozheng.eyevideo.R;
 import com.example.xiaobozheng.eyevideo.base.BaseFragment;
+import com.example.xiaobozheng.eyevideo.injection.component.AppComponent;
 
 /**
  * Created by Riane on 2016/11/25.
@@ -20,7 +21,7 @@ public class FindFragment extends BaseFragment {
     }
 
     @Override
-    protected void setupActivityComponent() {
+    protected void setupActivityComponent(AppComponent appComponent) {
 
     }
 

@@ -7,4 +7,10 @@
 
     <color name="reader_menu_bg_color">#191919</color>
     <color name="item_background">#55000000</color>
+    <!--通用二级标题的颜色-->
+    <color name="common_h2">#727272</color>
+    <!--通用分割线细-->
+    <color name="common_divider_narrow">#E3E3E3</color>
+    <color name="tip">#88303F9F</color>
+    <color name="white">#EEEEEE</color>
 </resources>

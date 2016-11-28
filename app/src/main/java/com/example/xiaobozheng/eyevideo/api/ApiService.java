@@ -16,4 +16,8 @@ public interface ApiService {
     //获取日常视频
     @GET("v2/feed?num=2")
     Observable<Daily> getDaily(@Query("date") long date);
+
+    //获取今天日常视频
+    @GET("v2/feed?num=2")
+    Observable<Daily> getDaily();
 }
