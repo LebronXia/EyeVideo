@@ -25,9 +25,6 @@ public class Cover implements Parcelable {
         dest.writeString(this.blurred);
     }
 
-    public Cover() {
-    }
-
     protected Cover(Parcel in) {
         this.feed = in.readString();
         this.detail = in.readString();

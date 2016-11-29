@@ -4,6 +4,7 @@ import com.example.xiaobozheng.eyevideo.api.Api;
 import com.example.xiaobozheng.eyevideo.base.BaseRxPresenter;
 import com.example.xiaobozheng.eyevideo.model.Daily;
 import com.example.xiaobozheng.eyevideo.ui.contract.ChoiceVideoContract;
+import com.example.xiaobozheng.eyevideo.util.LogUtils;
 
 import javax.inject.Inject;
 
@@ -64,11 +65,13 @@ public class ChoicePresenter extends BaseRxPresenter<ChoiceVideoContract.View> i
 
                     @Override
                     public void onError(Throwable e) {
+                        LogUtils.d("失败" + e.toString());
                         mView.showError();
                     }
 
                     @Override
                     public void onNext(Daily daily) {
+                        LogUtils.d("成功");
                         mView.showChoiceDailyData(daily);
                     }
                 });

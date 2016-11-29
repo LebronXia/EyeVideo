@@ -19,6 +19,6 @@ public class Daily {
         public long date;
         public long publishTime;
         private int count;
-        public List<ItemList> itemlist;
+        public List<ItemList> itemList;
     }
 }

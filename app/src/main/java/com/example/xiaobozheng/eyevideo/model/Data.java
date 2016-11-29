@@ -14,10 +14,11 @@ public class Data implements Parcelable {
     //日期
     public String text;
     public String description;
-    public String category;
     public Cover cover;
+    public String category;
     public String playUrl;
-    public long duration;
+    //持续时间
+    public int duration;
 
 
     @Override
@@ -30,12 +31,12 @@ public class Data implements Parcelable {
         dest.writeString(this.dataType);
         dest.writeInt(this.id);
         dest.writeString(this.title);
-        dest.writeString(text);
+        dest.writeString(this.text);
         dest.writeString(this.description);
-        dest.writeString(this.category);
         dest.writeParcelable(this.cover, flags);
+        dest.writeString(this.category);
         dest.writeString(this.playUrl);
-        dest.writeLong(this.duration);
+        dest.writeInt(this.duration);
     }
 
     public Data() {
@@ -47,10 +48,10 @@ public class Data implements Parcelable {
         this.title = in.readString();
         this.text = in.readString();
         this.description = in.readString();
-        this.category = in.readString();
         this.cover = in.readParcelable(Cover.class.getClassLoader());
+        this.category = in.readString();
         this.playUrl = in.readString();
-        this.duration = in.readLong();
+        this.duration = in.readInt();
     }
 
     public static final Parcelable.Creator<Data> CREATOR = new Parcelable.Creator<Data>() {
