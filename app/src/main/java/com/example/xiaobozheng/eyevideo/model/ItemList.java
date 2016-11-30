@@ -9,7 +9,7 @@ import me.drakeet.multitype.Item;
  * Created by xiaobozheng on 11/25/2016.
  */
 
-public class ItemList implements Item, Parcelable {
+public class ItemList implements Parcelable {
     public String type;
     public Data data;
 

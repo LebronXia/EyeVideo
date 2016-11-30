@@ -1,20 +1,17 @@
 package com.example.xiaobozheng.eyevideo.ui.fragment;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 
 import com.example.xiaobozheng.eyevideo.R;
-import com.example.xiaobozheng.eyevideo.base.BaseFragment;
 import com.example.xiaobozheng.eyevideo.base.BaseRVFragment;
 import com.example.xiaobozheng.eyevideo.injection.component.AppComponent;
 import com.example.xiaobozheng.eyevideo.injection.component.DaggerMianVideoComponent;
 import com.example.xiaobozheng.eyevideo.model.Category;
 import com.example.xiaobozheng.eyevideo.model.Daily;
 import com.example.xiaobozheng.eyevideo.model.ItemList;
+import com.example.xiaobozheng.eyevideo.model.RecycleViewItemData;
+import com.example.xiaobozheng.eyevideo.ui.adapter.MultipleItemAdapter;
 import com.example.xiaobozheng.eyevideo.ui.contract.ChoiceVideoContract;
 import com.example.xiaobozheng.eyevideo.ui.presenter.ChoicePresenter;
-import com.example.xiaobozheng.eyevideo.ui.support.CategoryViewProvider;
-import com.example.xiaobozheng.eyevideo.ui.support.DailyItemViewHolder;
 import com.example.xiaobozheng.eyevideo.util.LogUtils;
 
 import java.util.ArrayList;
@@ -29,11 +26,10 @@ import me.drakeet.multitype.MultiTypeAdapter;
  * Created by xiaobozheng on 11/24/2016.
  */
 
-public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, Daily> implements ChoiceVideoContract.View{
+public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewItemData> implements ChoiceVideoContract.View{
 
-    private List<Item> mItems;
+    private List<RecycleViewItemData> mItems;
     private String dateTime = "";
-    private MultiTypeAdapter mAdapter;
 
     @Override
     public int getLayoutResId() {
@@ -51,18 +47,18 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, Daily> imple
 
     @Override
     public void initDatas() {
-        mItems = new ArrayList<Item>();
+        mItems = new ArrayList<RecycleViewItemData>();
         mPresenter.getChoiceDailyData();
     }
 
     @Override
     public void initView() {
 
-        mAdapter = new MultiTypeAdapter(mItems);
-        mAdapter.register(Category.class, new CategoryViewProvider());
-        mAdapter.register(ItemList.class, new DailyItemViewHolder());
+        //mAdapter = new MultiTypeAdapter(mItems);
+       // mAdapter.register(Category.class, new CategoryViewProvider());
+        //mAdapter.register(ItemList.class, new DailyItemViewHolder());
 
-       // initAdapter(MultiTypeAdapter.class, true, true);
+       initAdapter(MultipleItemAdapter.class, true, true);
 
     }
 
@@ -73,11 +69,21 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, Daily> imple
         //将数据置于同一个item数列中
         for (Daily.IssueList issueList:daily.issueList){
             String date = issueList.itemList.get(0).data.text;
-            mItems.add(new Category( date == null ?  "Today" : date));
-            mItems.addAll(issueList.itemList);
+            RecycleViewItemData<Category> recycleViewItemData1 = new RecycleViewItemData<>();
+            recycleViewItemData1.setT(new Category( date == null ?  "Today" : date));
+            recycleViewItemData1.setDataType(MultipleItemAdapter.ITEM_TYPE.ITEM_TYPE_DATE.ordinal());
+            mItems.add(recycleViewItemData1);
+            for (ItemList itemList : issueList.itemList){
+                RecycleViewItemData<ItemList> recycleViewItemData2 = new RecycleViewItemData<>();
+                recycleViewItemData2.setT(itemList);
+                recycleViewItemData2.setDataType(MultipleItemAdapter.ITEM_TYPE.ITEM_TYPE_MOVIE.ordinal());
+                mItems.add(recycleViewItemData2);
+            }
+           // mItems.addAll(issueList.itemList);
         }
         String nextPageUrl = daily.nextPageUrl;
         dateTime = nextPageUrl.substring(nextPageUrl.indexOf("=") + 1, nextPageUrl.indexOf("&"));
+        mAdapter.addAll(mItems);
 
     }
 

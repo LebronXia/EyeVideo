@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.xiaobozheng.eyevideo.widget.RatioImageView;
 import com.yuyh.easyadapter.glide.GlideCircleTransform;
 import com.yuyh.easyadapter.glide.GlideRoundTransform;
 
@@ -173,6 +175,21 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     public BaseViewHolder setImageBitmap(int viewId, Bitmap imgBitmap) {
         ImageView view = getView(viewId);
         view.setImageBitmap(imgBitmap);
+        return this;
+    }
+
+    public BaseViewHolder setRationImageViewOriginalSize(int viewId, int x, int y){
+        RatioImageView mRivMovie = new RatioImageView(mContext);
+        mRivMovie.setOriginalSize(x,y);
+        return this;
+    }
+
+    public BaseViewHolder setRationImageImageUrl(int viewId, String Url){
+        RatioImageView mRivMovie = new RatioImageView(mContext);
+        Glide.with(mContext)
+                .load(Url)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(mRivMovie);
         return this;
     }
 
