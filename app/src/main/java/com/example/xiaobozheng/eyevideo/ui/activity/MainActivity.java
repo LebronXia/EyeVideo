@@ -5,19 +5,24 @@ import android.support.annotation.IdRes;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.example.xiaobozheng.eyevideo.R;
 import com.example.xiaobozheng.eyevideo.base.BaseActivity;
 import com.example.xiaobozheng.eyevideo.ui.fragment.ChoiceFragment;
 import com.example.xiaobozheng.eyevideo.ui.fragment.FindFragment;
 import com.example.xiaobozheng.eyevideo.ui.support.ScaleDownShowBehavior;
+import com.example.xiaobozheng.eyevideo.util.AnimatorUtil;
+import com.example.xiaobozheng.eyevideo.util.LogUtils;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
     @Bind(R.id.fab)
@@ -27,6 +32,9 @@ public class MainActivity extends BaseActivity {
     private LinearLayoutManager linearLayoutManager;
     private List<String> list;
     private BottomSheetBehavior mBottomSheetBehavior;
+    private ScaleDownShowBehavior scaleDownShowFab;
+    private int currentTabPosition;
+
 
     private ChoiceFragment mChoiceFragment;
     private FindFragment mFindFragment;
@@ -48,26 +56,15 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initDatas() {
-        // recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-
-//        list = new ArrayList<>();
-//        for (int i = 0; i < 20; i++) {
-//            list.add("我是第" + i + "个");
-//        }
 
     }
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        ScaleDownShowBehavior scaleDownShowFab = ScaleDownShowBehavior.from(mFloatingActionButton);
-//        scaleDownShowFab.setOnStateChangedListener(onStateChangedListener);
+        //根据悬浮按钮来隐藏底部栏
+        scaleDownShowFab = ScaleDownShowBehavior.from(mFloatingActionButton);
+        scaleDownShowFab.setOnStateChangedListener(onStateChangedListener);
           mBottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.tab_layout));
-//        recyclerView.setHasFixedSize(true);
-//        linearLayoutManager = new LinearLayoutManager(this);
-//        linearLayoutManager.setSmoothScrollbarEnabled(true);
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        ListRecyclerAdapter adapter = new ListRecyclerAdapter(list);
-//        recyclerView.setAdapter(adapter);
         //初始化Fragment
         initFragment(savedInstanceState);
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -87,7 +84,7 @@ public class MainActivity extends BaseActivity {
      */
     private void initFragment(Bundle sacedInstanceState){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        int currentTabPosition = 0;
+        currentTabPosition = 0;
         if (sacedInstanceState != null){
             mChoiceFragment = (ChoiceFragment) getSupportFragmentManager().findFragmentByTag("choiceFragment");
             mFindFragment = (FindFragment) getSupportFragmentManager().findFragmentByTag("findFragment");
@@ -104,6 +101,16 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    @OnClick(R.id.fab)
+    public void setFabOnClick(){
+        LogUtils.d("你好");
+        if (currentTabPosition == 0){
+            LogUtils.d("不好");
+            mChoiceFragment.linearLayoutManager.scrollToPosition(0);
+            hideFAB();
+        }
+    }
+
     /**
      * 切换
      * @param position
@@ -114,12 +121,14 @@ public class MainActivity extends BaseActivity {
         switch (position){
             //精选
             case 0:
+                currentTabPosition = 0;
                 transaction.hide(mFindFragment);
                 transaction.show(mChoiceFragment);
                 transaction.commitAllowingStateLoss();
                 break;
             //发现
             case 1:
+                currentTabPosition = 1;
                 transaction.hide(mChoiceFragment);
                 transaction.show(mFindFragment);
                 transaction.commitAllowingStateLoss();
@@ -141,9 +150,31 @@ public class MainActivity extends BaseActivity {
         super.onWindowFocusChanged(hasFocus);
         if (!initialize) {
             initialize = true;
+
+            hideFAB();
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
         }
     }
 
+    private void hideFAB() {
+        mFloatingActionButton.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AnimatorUtil.scaleHide(mFloatingActionButton, new ViewPropertyAnimatorListener() {
+                    @Override
+                    public void onAnimationStart(View view) {
+                    }
+                    @Override
+                    public void onAnimationEnd(View view) {
+                        mFloatingActionButton.setVisibility(View.GONE);
+                    }
+                    @Override
+                    public void onAnimationCancel(View view) {
+                    }
+                });
+            }
+        }, 500);
+    }
 
 }

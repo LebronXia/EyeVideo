@@ -27,7 +27,7 @@ public class ChoicePresenter extends BaseRxPresenter<ChoiceVideoContract.View> i
     }
 
     @Override
-    public void getChoiceDailyData(long date) {
+    public void getChoiceDailyData(long date, final boolean isRefresh) {
         Subscription rxSubscription = mApi.getDaily(date)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -45,14 +45,14 @@ public class ChoicePresenter extends BaseRxPresenter<ChoiceVideoContract.View> i
 
                     @Override
                     public void onNext(Daily daily) {
-                        mView.showChoiceDailyData(daily);
+                        mView.showChoiceDailyData(daily, isRefresh);
                     }
                 });
         addSubscrebe(rxSubscription);
     }
 
     @Override
-    public void getChoiceDailyData() {
+    public void getChoiceDailyData(final boolean isRefresh) {
         Subscription rxSubscription = mApi.getDaily()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -72,7 +72,7 @@ public class ChoicePresenter extends BaseRxPresenter<ChoiceVideoContract.View> i
                     @Override
                     public void onNext(Daily daily) {
                         LogUtils.d("成功");
-                        mView.showChoiceDailyData(daily);
+                        mView.showChoiceDailyData(daily, isRefresh);
                     }
                 });
         addSubscrebe(rxSubscription);

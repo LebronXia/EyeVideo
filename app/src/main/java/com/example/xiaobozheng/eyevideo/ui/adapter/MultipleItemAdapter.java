@@ -59,7 +59,7 @@ public class MultipleItemAdapter extends RecyclerArrayAdapter<RecycleViewItemDat
                         holder.setRationImageViewOriginalSize(R.id.riv_movie,16,9);
                         holder.setRationImageImageUrl(R.id.riv_movie, itemList.data.cover.detail);
                         holder.setText(R.id.tv_movietitle,itemList.data.title);
-;                       holder.setVisible(R.id.tv_movietype, View.VISIBLE);
+;                       holder.setText(R.id.tv_movietype, "#" + itemList.data.category + " / " + TimeUtils.secToTime(itemList.data.duration));
                     } else {
                         holder.setVisible(R.id.riv_movie, View.GONE);
                         holder.setVisible(R.id.tv_movietitle,View.GONE);

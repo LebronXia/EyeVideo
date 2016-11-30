@@ -30,6 +30,7 @@ public abstract class BaseRVFragment<T1 extends BaseContract.BasePresenter, T2> 
     protected EasyRecyclerView mRecyclerView;
 
     protected RecyclerArrayAdapter<T2> mAdapter;
+    public LinearLayoutManager linearLayoutManager;
 
     protected int start = 0;
     protected int limit = 20;
@@ -46,7 +47,9 @@ public abstract class BaseRVFragment<T1 extends BaseContract.BasePresenter, T2> 
 
     protected void initAdapter(boolean refreshable, boolean loadmoreable) {
         if (mRecyclerView != null) {
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getSupportActivity()));
+            linearLayoutManager = new LinearLayoutManager(getSupportActivity());
+            linearLayoutManager.setSmoothScrollbarEnabled(true);
+            mRecyclerView.setLayoutManager(linearLayoutManager);
             mRecyclerView.setItemDecoration(ContextCompat.getColor(activity, R.color.common_divider_narrow), 1, 0, 0);
             mRecyclerView.setAdapterWithProgress(mAdapter);
         }

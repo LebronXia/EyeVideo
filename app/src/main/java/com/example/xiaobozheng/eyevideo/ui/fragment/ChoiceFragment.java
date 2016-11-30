@@ -48,7 +48,7 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewI
     @Override
     public void initDatas() {
         mItems = new ArrayList<RecycleViewItemData>();
-        mPresenter.getChoiceDailyData();
+
     }
 
     @Override
@@ -59,12 +59,15 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewI
         //mAdapter.register(ItemList.class, new DailyItemViewHolder());
 
        initAdapter(MultipleItemAdapter.class, true, true);
-
+        onRefresh();
     }
 
     @Override
-    public void showChoiceDailyData(Daily daily) {
+    public void showChoiceDailyData(Daily daily, boolean isRefresh) {
         LogUtils.d(daily.issueList.get(0).itemList.get(0).data.duration + "持续时间");
+        if (isRefresh){
+            mAdapter.clear();
+        }
         int time = daily.issueList.get(0).itemList.get(0).data.duration;
         //将数据置于同一个item数列中
         for (Daily.IssueList issueList:daily.issueList){
@@ -89,28 +92,26 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewI
 
     @Override
     public void showError() {
-
+        loaddingError();
     }
 
     @Override
     public void complete() {
-
+        mRecyclerView.setRefreshing(false);
     }
 
     @Override
     public void onLoadMore() {
         super.onLoadMore();
+        mPresenter.getChoiceDailyData(Long.decode(dateTime), false);
     }
 
     @Override
     public void onRefresh() {
         super.onRefresh();
+        mPresenter.getChoiceDailyData(true);
     }
 
-    @Override
-    protected void loaddingError() {
-        super.loaddingError();
-    }
 
     @Override
     public void onItemClick(int position) {

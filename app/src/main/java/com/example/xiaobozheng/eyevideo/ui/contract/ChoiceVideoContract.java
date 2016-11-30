@@ -9,12 +9,12 @@ import com.example.xiaobozheng.eyevideo.model.Daily;
 
 public interface ChoiceVideoContract {
     interface View extends BaseContract.BaseView{
-        void showChoiceDailyData(Daily daily);
+        void showChoiceDailyData(Daily daily, boolean isRefresh);
     }
 
     interface Presenter extends BaseContract.BasePresenter<View>{
-        void getChoiceDailyData(long date);
+        void getChoiceDailyData(long date, boolean isRefresh);
 
-        void getChoiceDailyData();
+        void getChoiceDailyData(boolean isRefresh);
     }
 }

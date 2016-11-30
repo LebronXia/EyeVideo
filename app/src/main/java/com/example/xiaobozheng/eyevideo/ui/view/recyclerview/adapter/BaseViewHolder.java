@@ -179,13 +179,13 @@ abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
     }
 
     public BaseViewHolder setRationImageViewOriginalSize(int viewId, int x, int y){
-        RatioImageView mRivMovie = new RatioImageView(mContext);
+        RatioImageView mRivMovie = getView(viewId);
         mRivMovie.setOriginalSize(x,y);
         return this;
     }
 
     public BaseViewHolder setRationImageImageUrl(int viewId, String Url){
-        RatioImageView mRivMovie = new RatioImageView(mContext);
+        RatioImageView mRivMovie = getView(viewId);
         Glide.with(mContext)
                 .load(Url)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
