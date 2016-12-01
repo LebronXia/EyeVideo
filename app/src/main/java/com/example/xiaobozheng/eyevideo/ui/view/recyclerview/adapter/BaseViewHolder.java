@@ -1,6 +1,8 @@
 package com.example.xiaobozheng.eyevideo.ui.view.recyclerview.adapter;
 
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -21,9 +23,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.xiaobozheng.eyevideo.R;
+import com.example.xiaobozheng.eyevideo.model.ItemList;
+import com.example.xiaobozheng.eyevideo.ui.activity.MovieDetailActivity;
 import com.example.xiaobozheng.eyevideo.widget.RatioImageView;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 import com.yuyh.easyadapter.glide.GlideCircleTransform;
 import com.yuyh.easyadapter.glide.GlideRoundTransform;
+
+import static com.example.xiaobozheng.eyevideo.R.layout.item;
 
 /**
  * M为这个itemView对应的model。

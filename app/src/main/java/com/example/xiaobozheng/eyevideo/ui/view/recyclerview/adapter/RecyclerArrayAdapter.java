@@ -110,7 +110,7 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
      */
     private boolean mNotifyOnChange = true;
 
-    private Context mContext;
+    public Context mContext;
 
 
     /**

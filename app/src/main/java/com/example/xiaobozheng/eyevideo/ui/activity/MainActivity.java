@@ -103,9 +103,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.fab)
     public void setFabOnClick(){
-        LogUtils.d("你好");
         if (currentTabPosition == 0){
-            LogUtils.d("不好");
             mChoiceFragment.linearLayoutManager.scrollToPosition(0);
             hideFAB();
         }

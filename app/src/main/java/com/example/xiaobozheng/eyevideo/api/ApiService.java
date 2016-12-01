@@ -20,4 +20,7 @@ public interface ApiService {
     //获取今天日常视频
     @GET("v2/feed?num=2")
     Observable<Daily> getDaily();
+
+    //获取视频底下回复
+   // Observable
 }
