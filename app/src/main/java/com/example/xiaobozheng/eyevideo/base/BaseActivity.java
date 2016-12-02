@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.xiaobozheng.eyevideo.R;
+import com.example.xiaobozheng.eyevideo.app.EyeVideoApplication;
+import com.example.xiaobozheng.eyevideo.injection.component.AppComponent;
 
 import butterknife.ButterKnife;
 
@@ -26,6 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutId());
         mContext = this;
         ButterKnife.bind(this);
+        setupActivityComponent(EyeVideoApplication.getsInstance().getAppComponent());
         mCommonToolbar = ButterKnife.findById(this, R.id.common_toolbar);
         if (mCommonToolbar != null){
             initToolBar();
@@ -33,19 +36,22 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
         initDatas();
+        attachView();
         initViews(savedInstanceState);
 
     }
 
     public abstract int getLayoutId();
 
-    protected abstract void setupActivityComponent();
+    protected abstract void setupActivityComponent(AppComponent appComponent);
 
     public abstract void initToolBar();
 
     public abstract void initDatas();
 
     public abstract void initViews(Bundle savedInstanceState);
+
+    public abstract void attachView();
 
     @Override
     protected void onDestroy() {

@@ -1,5 +1,6 @@
 package com.example.xiaobozheng.eyevideo.injection.component;
 
+import com.example.xiaobozheng.eyevideo.ui.activity.MovieDetailActivity;
 import com.example.xiaobozheng.eyevideo.ui.fragment.ChoiceFragment;
 
 import dagger.Component;
@@ -11,4 +12,6 @@ import dagger.Component;
 public interface MianVideoComponent {
 
     ChoiceFragment inject(ChoiceFragment choiceFragment);
+
+    MovieDetailActivity inject(MovieDetailActivity movieDetailActivity);
 }

@@ -1,6 +1,7 @@
 package com.example.xiaobozheng.eyevideo.api;
 
 import com.example.xiaobozheng.eyevideo.model.Daily;
+import com.example.xiaobozheng.eyevideo.model.Replies;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -22,5 +23,10 @@ public interface ApiService {
     Observable<Daily> getDaily();
 
     //获取视频底下回复
-   // Observable
+    @GET("v1/replies/video")
+    Observable<Replies> getReplies(@Query("id") int id);
+
+    //获取更多视频底下回复
+    @GET("v1/replies/video?num=10")
+    Observable<Replies> getReplies(@Query("id")int id, @Query("lastId") int lastId);
 }

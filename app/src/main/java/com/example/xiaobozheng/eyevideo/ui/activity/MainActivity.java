@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.example.xiaobozheng.eyevideo.R;
 import com.example.xiaobozheng.eyevideo.base.BaseActivity;
+import com.example.xiaobozheng.eyevideo.injection.component.AppComponent;
 import com.example.xiaobozheng.eyevideo.ui.fragment.ChoiceFragment;
 import com.example.xiaobozheng.eyevideo.ui.fragment.FindFragment;
 import com.example.xiaobozheng.eyevideo.ui.support.ScaleDownShowBehavior;
@@ -35,7 +36,6 @@ public class MainActivity extends BaseActivity {
     private ScaleDownShowBehavior scaleDownShowFab;
     private int currentTabPosition;
 
-
     private ChoiceFragment mChoiceFragment;
     private FindFragment mFindFragment;
 
@@ -44,10 +44,6 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
-    @Override
-    protected void setupActivityComponent() {
-
-    }
 
     @Override
     public void initToolBar() {
@@ -56,6 +52,16 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initDatas() {
+
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+
+    }
+
+    @Override
+    public void attachView() {
 
     }
 

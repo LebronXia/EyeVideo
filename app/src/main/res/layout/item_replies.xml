@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    
+    <ImageView
+        android:id="@+id/reply_avatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="16dp"
+        android:src="@mipmap/ic_launcher"
+        />
+
+    <TextView
+        android:id="@+id/reply_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toRightOf="@id/reply_avatar"
+        android:layout_toLeftOf="@id/reply_time"
+        android:text="夏目"
+        />
+
+    <TextView
+        android:id="@+id/reply_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:textStyle="bold"
+        android:text="12:90"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reply_name"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toRightOf="@+id/reply_avatar"
+        android:layout_toLeftOf="@id/likeCount"
+        android:text="呵呵....."
+        />
+
+    <TextView
+        android:id="@+id/likeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_below="@id/reply_time"
+        android:drawableLeft="@drawable/ic_heart_full_24dp_pink"
+        android:paddingRight="4dp"
+        android:paddingLeft="4dp"
+        android:text="100"
+        />
+
+</RelativeLayout>
