@@ -20,7 +20,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:layout_toRightOf="@id/reply_avatar"
-        android:layout_toLeftOf="@id/reply_time"
+        android:layout_toLeftOf="@+id/reply_time"
         android:text="夏目"
         />
 
@@ -43,7 +43,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginBottom="8dp"
         android:layout_toRightOf="@+id/reply_avatar"
-        android:layout_toLeftOf="@id/likeCount"
+        android:layout_toLeftOf="@+id/likeCount"
         android:text="呵呵....."
         />
 
@@ -55,7 +55,6 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
         android:layout_below="@id/reply_time"
-        android:drawableLeft="@drawable/ic_heart_full_24dp_pink"
         android:paddingRight="4dp"
         android:paddingLeft="4dp"
         android:text="100"
