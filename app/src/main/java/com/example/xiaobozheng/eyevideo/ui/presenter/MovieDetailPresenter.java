@@ -55,6 +55,27 @@ public class MovieDetailPresenter extends BaseRxPresenter<MovieDetailContract.Vi
 
     @Override
     public void getMovieDetailReplies(int id, int lastId) {
+        Subscription rxSubscription = mApi.getReplies(id, lastId)
+                .map(replies -> replies.getReplyList())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Replies.ReplyListBean> >() {
+                    @Override
+                    public void onCompleted() {
+                        mView.complete();
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.showError();
+                    }
+
+                    @Override
+                    public void onNext(List<Replies.ReplyListBean> replyList) {
+                        mView.showMovieDetailRplies(replyList);
+                    }
+                });
+        addSubscrebe(rxSubscription);
     }
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="@dimen/default_margin"
+    >
+
+    <TextView
+        android:id="@+id/tv_movie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="?colorPrimary"
+        android:text="和闺蜜们去山尖上滑雪"
+        />
+
+    <TextView
+        android:id="@+id/tv_movie_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:text="#运动 / 05′31″"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rl_autor_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        >
+
+        <ImageView
+            android:id="@+id/iv_movie_author_avatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_movie_author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_movie_author_avatar"
+            android:textStyle="bold"
+            tools:text="GoPro"
+            />
+
+        <TextView
+            android:id="@+id/tv_movie_author_counts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_movie_author_name"
+            android:layout_marginLeft="24dp"
+            tools:text="64个视频"
+            />
+
+        <TextView
+            android:id="@+id/tv_movie_author_destription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_movie_author_name"
+            android:layout_toRightOf="@id/iv_movie_author_avatar"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="8dp"
+            tools:text="用第一人称视角记录刺激的愚弄的那个"
+            android:singleLine="true"
+            android:ellipsize="end"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        />
+
+    <TextView
+        android:id="@+id/tv_movie_destription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:textSize="16dp"
+        tools:text="心仪对象主动和自己搭上话时令人小鹿乱撞，然而若是和片中主人翁一样陷入恐慌，脑中可能就会上演一场真人版「脑筋急转弯」... From Future Boyfriends"
+        />
+
+</LinearLayout>

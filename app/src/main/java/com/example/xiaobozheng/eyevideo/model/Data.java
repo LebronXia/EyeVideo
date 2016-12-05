@@ -16,6 +16,7 @@ public class Data implements Parcelable {
     public String description;
     public Cover cover;
     public String category;
+    public Author author;
     public String playUrl;
     //持续时间
     public int duration;
@@ -34,6 +35,7 @@ public class Data implements Parcelable {
         dest.writeString(this.text);
         dest.writeString(this.description);
         dest.writeParcelable(this.cover, flags);
+        dest.writeParcelable(this.author,flags);
         dest.writeString(this.category);
         dest.writeString(this.playUrl);
         dest.writeInt(this.duration);
@@ -49,6 +51,7 @@ public class Data implements Parcelable {
         this.text = in.readString();
         this.description = in.readString();
         this.cover = in.readParcelable(Cover.class.getClassLoader());
+        this.author = in.readParcelable(Author.class.getClassLoader());
         this.category = in.readString();
         this.playUrl = in.readString();
         this.duration = in.readInt();
@@ -65,4 +68,5 @@ public class Data implements Parcelable {
             return new Data[size];
         }
     };
+
 }

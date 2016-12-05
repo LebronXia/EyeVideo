@@ -55,7 +55,6 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewI
 
     @Override
     public void initView() {
-        new MultipleItemAdapter(getActivity());
         initAdapter(MultipleItemAdapter.class, true, true);
 
         onRefresh();
