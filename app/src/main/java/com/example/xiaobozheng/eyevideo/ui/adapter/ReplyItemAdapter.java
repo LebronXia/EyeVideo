@@ -28,7 +28,7 @@ public class ReplyItemAdapter extends RecyclerArrayAdapter<Replies.ReplyListBean
         return new BaseViewHolder<Replies.ReplyListBean>(parent, R.layout.item_replies) {
             @Override
             public void setData(Replies.ReplyListBean item) {
-                super.setData(item);
+               // super.setData(item);
 
                 holder.setText( R.id.reply_name, item.getUser().getNickname());
                 holder.setText(R.id.reply_time, DateUtils.getRelativeTimeSpanString(item.getCreateTime(), System.currentTimeMillis(),

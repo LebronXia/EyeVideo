@@ -1,9 +1,6 @@
 package com.example.xiaobozheng.eyevideo.ui.activity;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +20,8 @@ import com.example.xiaobozheng.eyevideo.ui.contract.MovieDetailContract;
 import com.example.xiaobozheng.eyevideo.ui.fragment.ChoiceFragment;
 import com.example.xiaobozheng.eyevideo.ui.presenter.MovieDetailPresenter;
 import com.example.xiaobozheng.eyevideo.ui.view.recyclerview.adapter.RecyclerArrayAdapter;
-import com.example.xiaobozheng.eyevideo.util.LogUtils;
 import com.example.xiaobozheng.eyevideo.util.TimeUtils;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 import com.yuyh.easyadapter.glide.GlideCircleTransform;
 
@@ -119,7 +112,8 @@ public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> i
     public void initViews(Bundle savedInstanceState) {
         initAdapter(ReplyItemAdapter.class, true, true);
 
-        RecyclerArrayAdapter.ItemView itemView = new RecyclerArrayAdapter.ItemView() {
+        //给RecycleView插入头部
+        mAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 View headerView = LayoutInflater.from(mContext).inflate(R.layout.header_replyitem, parent, false);
@@ -130,22 +124,7 @@ public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> i
             public void onBindView(View headerView) {
                 mHeaderViewHolder = new HeaderViewHolder(headerView);
             }
-        };
-        mAdapter.addHeader(itemView);
-        //给RecycleView插入头部
-//        mAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
-//            @Override
-//            public View onCreateView(ViewGroup parent) {
-//                View headerView = LayoutInflater.from(mContext).inflate(R.layout.header_replyitem, parent, false);
-//                return headerView;
-//            }
-//
-//            @Override
-//            public void onBindView(View headerView) {
-//                mHeaderViewHolder = new HeaderViewHolder(headerView);
-//            }
-//        });
-        initHeaderView();
+        });
         onRefresh();
     }
 
@@ -182,7 +161,9 @@ public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> i
 
     @Override
     public void showMovieDetailRplies(List<Replies.ReplyListBean> replyList) {
+
         mAdapter.addAll(replyList);
+        initHeaderView();
         if (replyList.size() != 0){
             lastId = replyList.get(replyList.size() - 1).getSequence();
         }
