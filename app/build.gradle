@@ -3,12 +3,12 @@ apply plugin: 'android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 23
     buildToolsVersion "24.0.3"
     defaultConfig {
         applicationId "com.example.xiaobozheng.eyevideo"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -61,5 +61,6 @@ dependencies {
     compile('me.drakeet.multitype:multitype:2.2.1', {
         exclude group: 'com.android.support'
     })
-    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    //FlycoTabLayout ,底部点击栏（http://blog.csdn.net/analyzesystem/article/details/51426473）
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar'
 }

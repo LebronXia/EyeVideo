@@ -2,9 +2,11 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
     tools:context="com.example.xiaobozheng.eyevideo.ui.activity.MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -35,15 +37,32 @@
 
     <!--</android.support.v7.widget.RecyclerView>-->
 
-    <com.roughike.bottombar.BottomBar
+    <!--<com.roughike.bottombar.BottomBar-->
+        <!--android:id="@+id/tab_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?actionBarSize"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--app:layout_behavior="@string/bottom_sheet_behavior"-->
+        <!--app:bb_tabXmlResource="@xml/bottombar_tabs"-->
+        <!--/>-->
+    
+    <com.flyco.tablayout.CommonTabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
+        android:background="@color/white"
         app:layout_behavior="@string/bottom_sheet_behavior"
-        app:bb_tabXmlResource="@xml/bottombar_tabs"
-        />
+        tl:tl_indicator_height="0dp"
+        tl:tl_iconHeight="20dp"
+        tl:tl_iconWidth="20dp"
+        tl:tl_indicator_color="@color/gray"
+        tl:tl_textSelectColor="@color/light_gray"
+        tl:tl_textUnselectColor="@color/common_gray"
+        tl:tl_textsize="11sp"
+        tl:tl_underline_height="0dp"
+    />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

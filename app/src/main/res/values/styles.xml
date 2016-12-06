@@ -23,4 +23,6 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <style name="tab_rb_style"></style>
+
 </resources>

@@ -2,9 +2,6 @@ package com.example.xiaobozheng.eyevideo.model;
 
 import java.util.List;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
-import static com.example.xiaobozheng.eyevideo.R.layout.item;
-
 /**
  * Created by xiaobozheng on 11/25/2016.
  */

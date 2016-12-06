@@ -2,8 +2,10 @@ package com.example.xiaobozheng.eyevideo.ui.activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -96,21 +98,21 @@ public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> i
     @Override
     public void initDatas() {
         item = getIntent().getParcelableExtra(ChoiceFragment.EXTRA_ITEM);
-        boolean setUp = jcVideoPlayerStandard.setUp(item.data.playUrl, JCVideoPlayer.SCREEN_LAYOUT_LIST,
-                item.data.title);
+        boolean setUp = jcVideoPlayerStandard.setUp(item.data.playUrl, JCVideoPlayer.SCREEN_LAYOUT_LIST, "");
         if (setUp) {
             //视频图的载入
             Picasso.with(this)
                     .load(item.data.cover.detail)
                     .into(jcVideoPlayerStandard.thumbImageView);
         }
-        jcVideoPlayerStandard.looping = true;
+       jcVideoPlayerStandard.looping = true;
 
     }
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        initAdapter(ReplyItemAdapter.class, true, true);
+        SetTranslanteBar();
+        initAdapter(ReplyItemAdapter.class, false, true);
 
         //给RecycleView插入头部
         mAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
@@ -133,11 +135,11 @@ public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> i
         if (item.data.author == null){
             mHeaderViewHolder.mRlAuthorView.setVisibility(View.GONE);
         } else {
-//            Glide.with(mContext)
-//                    .load(item.data.author.getIcon())
-//                    .placeholder(R.mipmap.avatar_default)
-//                    .transform(new GlideCircleTransform(MovieDetailActivity.this))
-//                    .into(mHeaderViewHolder.mIvAuthorAvatar);
+            Glide.with(mContext)
+                    .load(item.data.author.getIcon())
+                    .placeholder(R.mipmap.avatar_default)
+                    .transform(new GlideCircleTransform(MovieDetailActivity.this))
+                    .into(mHeaderViewHolder.mIvAuthorAvatar);
             mHeaderViewHolder.mTvAuthorName.setText(item.data.author.getName());
             mHeaderViewHolder.mTvAuthorCounts.setText(item.data.author.getVideoNum() + "个视频");
             mHeaderViewHolder.mTvAuthorDescription.setText(item.data.author.getDescription());
@@ -150,7 +152,12 @@ public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> i
     //点击播放视频
     @OnClick(R.id.videoplayer)
     public void videoClick(){
-        jcVideoPlayerStandard.startWindowTiny();
+      //  jcVideoPlayerStandard.startFullscreen();
+    }
+
+    @OnClick(R.id.ib_back)
+    public void ibBackClick(){
+        onBackPressed();
     }
 
     @Override
@@ -185,7 +192,16 @@ public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> i
     @Override
     protected void onPause() {
         super.onPause();
+        //页面停止时销毁视频
         JCVideoPlayer.releaseAllVideos();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
