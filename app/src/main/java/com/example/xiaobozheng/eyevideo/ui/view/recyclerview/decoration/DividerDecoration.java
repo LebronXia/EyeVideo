@@ -116,6 +116,8 @@ public class DividerDecoration extends RecyclerView.ItemDecoration{
                     RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
                     int top = child.getBottom() + params.bottomMargin;
                     int bottom = top + mHeight;
+                    int left = child.getRight() + params.rightMargin;
+                    int right = left + mHeight;
                     mColorDrawable.setBounds(start,top,end,bottom);
                     mColorDrawable.draw(c);
                 }else {

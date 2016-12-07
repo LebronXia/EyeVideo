@@ -2,6 +2,7 @@ package com.example.xiaobozheng.eyevideo.injection.component;
 
 import com.example.xiaobozheng.eyevideo.ui.activity.MovieDetailActivity;
 import com.example.xiaobozheng.eyevideo.ui.fragment.ChoiceFragment;
+import com.example.xiaobozheng.eyevideo.ui.fragment.SpecialFragment;
 
 import dagger.Component;
 
@@ -12,6 +13,8 @@ import dagger.Component;
 public interface MianVideoComponent {
 
     ChoiceFragment inject(ChoiceFragment choiceFragment);
+
+    SpecialFragment inject(SpecialFragment specialFragment);
 
     MovieDetailActivity inject(MovieDetailActivity movieDetailActivity);
 }

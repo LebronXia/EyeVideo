@@ -5,13 +5,11 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <com.example.xiaobozheng.eyevideo.ui.view.recyclerview.EasyRecyclerView
-        android:id="@+id/recyclerView"
+    <com.sivin.Banner
+        android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_empty="@layout/common_empty_view"
-        app:layout_progress="@layout/common_progress_view"
-        app:scrollbars="none"
-        />
+        android:layout_height="180dp"
+        app:banner_pointGravity="right"
+        ></com.sivin.Banner>
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.example.xiaobozheng.eyevideo.api;
 
 import com.example.xiaobozheng.eyevideo.app.Constant;
 import com.example.xiaobozheng.eyevideo.model.Daily;
+import com.example.xiaobozheng.eyevideo.model.Discover;
 import com.example.xiaobozheng.eyevideo.model.Replies;
 
 import okhttp3.OkHttpClient;
@@ -70,5 +71,13 @@ public class Api {
      */
     public Observable<Replies> getReplies(int id, int lastId){
         return mApiService.getReplies(id, lastId);
+    }
+
+    /**
+     * 获取发现界面的数据
+     * @return
+     */
+    public Observable<Discover> getDiscover(){
+        return mApiService.getDiscover();
     }
 }

@@ -64,7 +64,6 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
     protected OnItemLongClickListener mItemLongClickListener;
 
     RecyclerView.AdapterDataObserver mObserver;
-
     public interface ItemView {
         View onCreateView(ViewGroup parent);
 
@@ -77,6 +76,8 @@ abstract public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<BaseV
         public GridSpanSizeLookup(int maxCount) {
             this.mMaxCount = maxCount;
         }
+
+
 
         @Override
         public int getSpanSize(int position) {

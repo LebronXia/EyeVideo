@@ -27,7 +27,7 @@ public abstract class BaseFragment extends Fragment {
     protected LayoutInflater mInflater;
 
     protected Context mContext;
-    private CustomDialog mDialog;
+    private CustomDialog dialog;
 
     public abstract int getLayoutResId();
 
@@ -92,5 +92,29 @@ public abstract class BaseFragment extends Fragment {
 
     protected View getParentView() {
         return parentView;
+    }
+
+    public CustomDialog getDialog() {
+        if (dialog == null) {
+            dialog = CustomDialog.instance(getActivity());
+            dialog.setCancelable(false);
+        }
+        return dialog;
+    }
+
+    public void hideDialog() {
+        if (dialog != null)
+            dialog.hide();
+    }
+
+    public void showDialog() {
+        getDialog().show();
+    }
+
+    public void dismissDialog() {
+        if (dialog != null) {
+            dialog.dismiss();
+            dialog = null;
+        }
     }
 }
