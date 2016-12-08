@@ -41,6 +41,7 @@ public class EasyRecyclerView extends FrameLayout {
     private int mProgressId;
     private int mEmptyId;
     private int mErrorId;
+    private boolean isSpecialFragment;
 
     protected boolean mClipToPadding;
     protected int mPadding;
@@ -56,6 +57,7 @@ public class EasyRecyclerView extends FrameLayout {
 
     protected SwipeRefreshLayout mPtrLayout;
     protected OnRefreshListener mRefreshListener;
+    protected StartBannerOnClick mStartBannerOnClick;
 
     public List<RecyclerView.ItemDecoration> decorations = new ArrayList<>();
 
@@ -197,6 +199,9 @@ public class EasyRecyclerView extends FrameLayout {
                     super.onScrolled(recyclerView, dx, dy);
                     if (mExternalOnScrollListener != null)
                         mExternalOnScrollListener.onScrolled(recyclerView, dx, dy);
+                        if (mRecycler.canScrollVertically(-1) & isSpecialFragment){
+                            mStartBannerOnClick.startBanner();
+                        }
 
                 }
 
@@ -627,6 +632,18 @@ public class EasyRecyclerView extends FrameLayout {
         if (DEBUG) {
             Log.i(TAG, content);
         }
+    }
+
+    public void setIsSpecialFragment(boolean isTrue){
+        isSpecialFragment = isTrue;
+    }
+
+    public interface StartBannerOnClick{
+        void startBanner();
+    }
+
+    public void setStartBannerOnClick(StartBannerOnClick startBannerOnClick){
+        mStartBannerOnClick = startBannerOnClick;
     }
 
 }

@@ -20,9 +20,10 @@ import com.example.xiaobozheng.eyevideo.ui.contract.SpecialContract;
 import com.example.xiaobozheng.eyevideo.ui.presenter.SpecialPresenter;
 import com.example.xiaobozheng.eyevideo.ui.view.recyclerview.EasyRecyclerView;
 import com.example.xiaobozheng.eyevideo.ui.view.recyclerview.adapter.RecyclerArrayAdapter;
-import com.sivin.Banner;
+import com.example.xiaobozheng.eyevideo.widget.banner.Banner;
 import com.sivin.BannerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -42,7 +43,6 @@ public class SpecialFragment extends BaseFragment implements SpecialContract.Vie
     //http://www.jianshu.com/p/a5655934f622
     private Banner mBanner;
     private View headerView;
-
     @Inject
     SpecialPresenter mSpecialPresenter;
     private SpecialItemAdapter mSpecialItemAdapter;
@@ -78,8 +78,15 @@ public class SpecialFragment extends BaseFragment implements SpecialContract.Vie
         mRecyclerView.setItemDecoration(ContextCompat.getColor(mContext, R.color.common_divider_narrow), 8, 4, 4);
         mRecyclerView.setErrorView(R.layout.common_error_view);
         mRecyclerView.setAdapterWithProgress(mSpecialItemAdapter);
+        //在mRecyclerView位于顶部的时候，让banner重新轮播滑动
+        mRecyclerView.setStartBannerOnClick(new EasyRecyclerView.StartBannerOnClick() {
+            @Override
+            public void startBanner() {
+                mBanner.goScroll();
+            }
+        });
+        mRecyclerView.setIsSpecialFragment(true);
         mSpecialPresenter.getDiscoverData();
-
         mSpecialItemAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
@@ -120,13 +127,18 @@ public class SpecialFragment extends BaseFragment implements SpecialContract.Vie
 
     @Override
     public void showDiscoverData(List<ItemList> itemLists) {
+        List<ItemList> mTagItemLists = new ArrayList<>();
         if (itemLists != null && itemLists.size() > 0){
             mSpecialItemAdapter.clear();
-            mSpecialItemAdapter.addAll(itemLists);
 
+            for (int i = 4; i < itemLists.size(); i++){
+                mTagItemLists.add(itemLists.get(i));
+            }
+            mSpecialItemAdapter.addAll(mTagItemLists);
             //广告栏的list数组
             ItemList mBannerList = itemLists.get(0);
             initBanner(mBannerList.data.itemList);
+            mBanner.notifiDataHasChanged();
         }
     }
 

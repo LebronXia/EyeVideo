@@ -31,7 +31,6 @@ public class SpecialItemAdapter extends RecyclerArrayAdapter<ItemList>{
                     holder.setText(R.id.tv_special_card, item.data.title);
                     ImageView imgPicture = holder.getView(R.id.iv_special_card);
                     ViewGroup.LayoutParams params = imgPicture.getLayoutParams();
-
                     DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
                     int width = dm.widthPixels / 2;//宽度为屏幕宽度一半
                     params.height = width;

@@ -3,13 +3,18 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:weightSum="1">
 
-    <com.sivin.Banner
+    <com.example.xiaobozheng.eyevideo.widget.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        app:banner_pointGravity="right"
-        ></com.sivin.Banner>
+        app:banner_pointGravity="center_horizontal"
+        app:banner_pointDrawable="@drawable/selector_banner_point"
+        app:banner_pointContainerBackground="@android:color/transparent"
+        app:banner_pointTopBottomMargin="10dp"
+        app:banner_pointLeftRightMargin="6dp"
+        />
 
 </LinearLayout>
