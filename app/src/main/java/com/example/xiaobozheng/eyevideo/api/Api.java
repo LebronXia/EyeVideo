@@ -4,6 +4,7 @@ import com.example.xiaobozheng.eyevideo.app.Constant;
 import com.example.xiaobozheng.eyevideo.model.Daily;
 import com.example.xiaobozheng.eyevideo.model.Discover;
 import com.example.xiaobozheng.eyevideo.model.Replies;
+import com.example.xiaobozheng.eyevideo.model.SectionList;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -80,4 +81,15 @@ public class Api {
     public Observable<Discover> getDiscover(){
         return mApiService.getDiscover();
     }
+
+    /**
+     * 获取发现专题下的各个小专题
+     * @param id
+     * @return
+     */
+    public Observable<SectionList> getSectionList(int id){
+        return mApiService.getSectionList(id);
+    }
+
+
 }
