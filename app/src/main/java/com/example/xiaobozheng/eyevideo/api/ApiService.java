@@ -3,6 +3,7 @@ package com.example.xiaobozheng.eyevideo.api;
 import com.example.xiaobozheng.eyevideo.model.Daily;
 import com.example.xiaobozheng.eyevideo.model.Discover;
 import com.example.xiaobozheng.eyevideo.model.Replies;
+import com.example.xiaobozheng.eyevideo.model.SectionList;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -35,4 +36,7 @@ public interface ApiService {
     @GET("v3/discovery")
     Observable<Discover> getDiscover();
 
+    //获取发现专题下的各个小专题
+    @GET("v3/categories/detail")
+    Observable<SectionList> getSectionList(@Query("id") int id);
 }

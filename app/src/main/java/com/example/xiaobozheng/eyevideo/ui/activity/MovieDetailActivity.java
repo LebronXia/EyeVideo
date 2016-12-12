@@ -113,6 +113,12 @@ public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> i
         SetTranslanteBar();
         initAdapter(ReplyItemAdapter.class, false, true);
 
+        onRefresh();
+    }
+
+    //初始化头部
+    private void initHeaderView() {
+
         //给RecycleView插入头部
         mAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
@@ -126,11 +132,7 @@ public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> i
                 mHeaderViewHolder = new HeaderViewHolder(headerView);
             }
         });
-        onRefresh();
-    }
 
-    //初始化头部
-    private void initHeaderView() {
         if (item.data.author == null){
             mHeaderViewHolder.mRlAuthorView.setVisibility(View.GONE);
         } else {
