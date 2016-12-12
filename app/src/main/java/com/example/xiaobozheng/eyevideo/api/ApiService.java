@@ -34,4 +34,5 @@ public interface ApiService {
     //获取发现界面的数据
     @GET("v3/discovery")
     Observable<Discover> getDiscover();
+
 }

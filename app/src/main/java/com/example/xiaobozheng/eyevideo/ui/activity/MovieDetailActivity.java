@@ -40,7 +40,6 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 /**
  * Created by xiaobozheng on 12/1/2016.
  */
-
 public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> implements MovieDetailContract.View{
 
     @Bind(R.id.videoplayer)
