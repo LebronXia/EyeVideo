@@ -12,6 +12,5 @@ public class Header {
         public String text;
         public String font;
         public String addTrack;
-
     }
 }

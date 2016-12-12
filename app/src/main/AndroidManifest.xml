@@ -27,6 +27,8 @@
         <activity android:name=".ui.activity.MovieDetailActivity"
                   android:configChanges="orientation|screenSize|keyboardHidden"
             />
+
+        <activity android:name=".ui.activity.SpecialDetailActivity"/>
     </application>
 
 </manifest>

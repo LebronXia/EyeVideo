@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <com.example.xiaobozheng.eyevideo.widget.RatioImageView
+        android:id="@+id/riv_specialdetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:visibility="visible"
+        tools:background="@color/item_background"
+        tools:layout_height="200dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_specialdatail_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="被奥地利毁掉的图片"
+        android:textSize="@dimen/deauflt_text"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/default_margin"
+        />
+
+    <TextView
+        android:id="@+id/tv_specialdatail_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="#广告 / 00′32″"
+        android:layout_marginTop="@dimen/default_margin"
+        />
+
+</LinearLayout>

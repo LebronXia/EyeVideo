@@ -1,7 +1,9 @@
 package com.example.xiaobozheng.eyevideo.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -9,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.xiaobozheng.eyevideo.R;
 import com.example.xiaobozheng.eyevideo.model.ItemList;
+import com.example.xiaobozheng.eyevideo.ui.activity.SpecialDetailActivity;
 import com.example.xiaobozheng.eyevideo.ui.view.recyclerview.adapter.BaseViewHolder;
 import com.example.xiaobozheng.eyevideo.ui.view.recyclerview.adapter.RecyclerArrayAdapter;
 
@@ -38,6 +41,15 @@ public class SpecialItemAdapter extends RecyclerArrayAdapter<ItemList>{
                     Glide.with(mContext).load(item.data.image).
                             diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imgPicture);
                     //holder.setImageUrl(R.id.iv_special_card, item.data.image);
+
+                    holder.getItemView().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(mContext, SpecialDetailActivity.class);
+                            intent.putExtra(SpecialDetailActivity.EXTRA_SPECIAL_ITEMLIST, item);
+                            mContext.startActivity(intent);
+                        }
+                    });
                 }
             }
         };

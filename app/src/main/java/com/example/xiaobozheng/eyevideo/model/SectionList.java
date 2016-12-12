@@ -7,11 +7,11 @@ import java.util.List;
  */
 
 public class SectionList {
-    private int id;
-    private String type;
-    private List<Header> header;
-    private List<ItemList> itemList;
-    private List<Header> footer;
-    private int count;
+    public int id;
+    public String type;
+    public Header header;
+    public List<ItemList> itemList;
+    public Header footer;
+    public int count;
 
 }

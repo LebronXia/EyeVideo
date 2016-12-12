@@ -5,6 +5,7 @@ import com.example.xiaobozheng.eyevideo.model.Daily;
 import com.example.xiaobozheng.eyevideo.model.Discover;
 import com.example.xiaobozheng.eyevideo.model.Replies;
 import com.example.xiaobozheng.eyevideo.model.SectionList;
+import com.example.xiaobozheng.eyevideo.model.SpecialData;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -87,8 +88,8 @@ public class Api {
      * @param id
      * @return
      */
-    public Observable<SectionList> getSectionList(int id){
-        return mApiService.getSectionList(id);
+    public Observable<SpecialData> getSpecialData(int id){
+        return mApiService.getSpecialData(id);
     }
 
 

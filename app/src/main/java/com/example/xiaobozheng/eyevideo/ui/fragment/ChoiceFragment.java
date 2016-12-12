@@ -30,7 +30,7 @@ import java.util.List;
 public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewItemData> implements ChoiceVideoContract.View{
 
     public static final String EXTRA_ITEM = "extra_item";
-    private List<RecycleViewItemData> mItems;
+    private List<RecycleViewItemData> mItems = new ArrayList<>();
     private String dateTime = "";
 
     @Override
@@ -49,7 +49,6 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewI
 
     @Override
     public void initDatas() {
-        mItems = new ArrayList<RecycleViewItemData>();
 
     }
 

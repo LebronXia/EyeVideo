@@ -4,6 +4,7 @@ import com.example.xiaobozheng.eyevideo.model.Daily;
 import com.example.xiaobozheng.eyevideo.model.Discover;
 import com.example.xiaobozheng.eyevideo.model.Replies;
 import com.example.xiaobozheng.eyevideo.model.SectionList;
+import com.example.xiaobozheng.eyevideo.model.SpecialData;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -38,5 +39,5 @@ public interface ApiService {
 
     //获取发现专题下的各个小专题
     @GET("v3/categories/detail")
-    Observable<SectionList> getSectionList(@Query("id") int id);
+    Observable<SpecialData> getSpecialData(@Query("id") int id);
 }
