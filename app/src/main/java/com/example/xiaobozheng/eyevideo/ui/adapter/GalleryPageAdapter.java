@@ -14,6 +14,7 @@ import com.example.xiaobozheng.eyevideo.model.ItemList;
 import com.example.xiaobozheng.eyevideo.util.TimeUtils;
 import com.example.xiaobozheng.eyevideo.widget.RatioImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.attr.x;
@@ -25,34 +26,50 @@ import static android.R.attr.y;
 
 public class GalleryPageAdapter extends PagerAdapter{
 
-    private List<ItemList> itemLists;
+    private List<ItemList> itemLists  = new ArrayList<>();
     private Context context;
-    private int layouId;
 
-    public GalleryPageAdapter(Context context, List<ItemList> itemLists) {
+    public GalleryPageAdapter(Context context) {
         super();
-        this.itemLists = itemLists;
         this.context = context;
     }
 
-    public void setItemLists(List<ItemList> itemLists){
-        this.itemLists = itemLists;
+    public void setItemLists(List<ItemList> list){
+        if (list.size() <= 0){
+            itemLists.clear();
+            notifyDataSetChanged();
+            return;
+        }
+        itemLists.clear();
+        itemLists.addAll(list);
+        notifyDataSetChanged();
     }
+
     @Override
     public int getCount() {
         if (itemLists.size() <= 0){
             return 0;
         }
-        return itemLists.size();
+        return Integer.MAX_VALUE;
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        int pos = position % itemLists.size();
+        //
+        position %= itemLists.size();
 
-        ItemList itemList = itemLists.get(pos);
+        if (position < 0){
+            position = itemLists.size() + position;
+        }
+
+        ItemList itemList = itemLists.get(position);
         View view = LayoutInflater.from(context).inflate(R.layout.item_update_content, null);
-        view.setTag(pos);
+        view.setTag(position);
         RatioImageView mRivSpeicalDetail = (RatioImageView) view.findViewById(R.id.riv_specialdetail);
         TextView mTvSpecialDetailTitle = (TextView) view.findViewById(R.id.tv_specialdatail_title);
         TextView mTvSpeicalDetailType = (TextView) view.findViewById(R.id.tv_specialdatail_type);

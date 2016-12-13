@@ -4,6 +4,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -17,6 +19,7 @@ import com.example.xiaobozheng.eyevideo.model.ItemList;
 import com.example.xiaobozheng.eyevideo.model.SectionList;
 import com.example.xiaobozheng.eyevideo.model.SpecialData;
 import com.example.xiaobozheng.eyevideo.ui.adapter.GalleryPageAdapter;
+import com.example.xiaobozheng.eyevideo.ui.adapter.HotLikedAdapter;
 import com.example.xiaobozheng.eyevideo.ui.contract.SpecialDetailContract;
 import com.example.xiaobozheng.eyevideo.ui.presenter.SpeicalDetailPresenter;
 import com.example.xiaobozheng.eyevideo.ui.support.ZoomOutPageTransformer;
@@ -28,8 +31,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.BindInt;
 
 import static android.R.attr.id;
+import static android.R.attr.tabStripEnabled;
 import static java.security.AccessController.getContext;
 
 /**
@@ -43,12 +48,15 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
     ViewPager mViewPager;
     @Bind(R.id.ll_viewpager)
     LinearLayout mLlViewPager;
+    @Bind(R.id.rv_hotlikedcontent)
+    RecyclerView mHotLikedRecyclerView;
     private ItemList mItemList;
     private GalleryPageAdapter mPageAdapter;
     //最近更新内容
     private List<ItemList> mLatelyItemLists = new ArrayList<ItemList>();
     //最受欢迎内容
     private List<ItemList> mLikedItemLists = new ArrayList<ItemList>();
+    private HotLikedAdapter mHotLikedAdapter;
 
     @Inject
     SpeicalDetailPresenter mSpeicalDetailPresenter;
@@ -83,9 +91,17 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
 //        int width = ScreenUtil.getScreenWidth(SpecialDetailActivity.this) * (7/8);
 //        params.width = width;
 //        mViewPager.setLayoutParams(params);
-        mPageAdapter = new GalleryPageAdapter(SpecialDetailActivity.this, mLatelyItemLists);
-        mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
-        mViewPager.addOnPageChangeListener(this);
+        mPageAdapter = new GalleryPageAdapter(SpecialDetailActivity.this);
+        mViewPager.setPageMargin(getResources().getDimensionPixelSize(R.dimen.default_margin));
+        //限定预加载的页面个数
+        mViewPager.setOffscreenPageLimit(3);
+        // mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+       // mViewPager.addOnPageChangeListener(this);
+
+        mHotLikedRecyclerView.setHasFixedSize(true);
+        mHotLikedRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mHotLikedAdapter = new HotLikedAdapter(mContext, mLikedItemLists);
+        mHotLikedRecyclerView.setAdapter(mHotLikedAdapter);
         mSpeicalDetailPresenter.getSpecialDetailData(mItemList.data.id);
     }
 
@@ -101,6 +117,7 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
         if (specialData == null) return;
         mLatelyItemLists.addAll(specialData.sectionList.get(0).itemList.get(0).data.itemList);
         mLikedItemLists.addAll(specialData.sectionList.get(1).itemList);
+        mHotLikedAdapter.notifyDataSetChanged();
         mPageAdapter.setItemLists(mLatelyItemLists);
         mViewPager.setAdapter(mPageAdapter);
     }
@@ -114,6 +131,7 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
     public void complete() {
 
     }
+
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

@@ -164,6 +164,7 @@ public class EasyRVHolder extends RecyclerView.ViewHolder implements ViewHelper.
         return this;
     }
 
+
     @Override
     public EasyRVHolder setTag(int viewId, Object tag) {
         View view = getView(viewId);
