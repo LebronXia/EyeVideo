@@ -89,7 +89,10 @@ public class Data implements Parcelable {
 
     public static class Header implements Parcelable {
         public int id;
+        public String icon;
         public String title;
+        public String description;
+
 
         @Override
         public int describeContents() {
@@ -99,7 +102,9 @@ public class Data implements Parcelable {
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.id);
+            dest.writeString(this.icon);
             dest.writeString(this.title);
+            dest.writeString(this.description);
         }
 
         public Header() {
@@ -107,7 +112,9 @@ public class Data implements Parcelable {
 
         protected Header(Parcel in) {
             this.id = in.readInt();
+            this.icon = in.readString();
             this.title = in.readString();
+            this.description = in.readString();
         }
 
         public static final Creator<Header> CREATOR = new Creator<Header>() {
@@ -122,4 +129,5 @@ public class Data implements Parcelable {
             }
         };
     }
+
 }

@@ -28,23 +28,6 @@
 
     </FrameLayout>
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/recycleview"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-        <!--&gt;-->
-
-    <!--</android.support.v7.widget.RecyclerView>-->
-
-    <!--<com.roughike.bottombar.BottomBar-->
-        <!--android:id="@+id/tab_layout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?actionBarSize"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--app:layout_behavior="@string/bottom_sheet_behavior"-->
-        <!--app:bb_tabXmlResource="@xml/bottombar_tabs"-->
-        <!--/>-->
     
     <com.flyco.tablayout.CommonTabLayout
         android:id="@+id/tab_layout"

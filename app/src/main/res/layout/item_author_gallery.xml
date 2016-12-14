@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
               android:background="@color/white"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_marginLeft="6dp"
+    >
 
     <com.example.xiaobozheng.eyevideo.widget.RatioImageView
         android:id="@+id/riv_specialdetail"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:visibility="visible"
         tools:background="@color/item_background"
         tools:layout_height="200dp"
@@ -21,9 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="被奥地利毁掉的图片"
-        android:textSize="14sp"
+        android:textSize="@dimen/middle_text"
         android:textStyle="bold"
-        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin"
         />
 
@@ -31,8 +33,8 @@
         android:id="@+id/tv_specialdatail_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:text="#广告 / 00′32″"
+        android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin"
         />
 

@@ -9,5 +9,6 @@
 
     <dimen name="big_text">20sp</dimen>
     <dimen name="deauflt_text">16sp</dimen>
+    <dimen name="middle_text">14sp</dimen>
     <dimen name="small_text">12sp</dimen>
 </resources>

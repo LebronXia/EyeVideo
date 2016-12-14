@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
@@ -9,43 +10,84 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.example.xiaobozheng.eyevideo.widget.RatioImageView
+            android:id="@+id/iv_category_pic"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="250dp"
             android:scaleType="centerCrop"
             />
-        <TextView
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="你好"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            />
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tv_category_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="广告"
+                android:textStyle="bold"
+                android:textSize="@dimen/big_text"
+                android:textColor="@color/white"
+                />
 
+            <TextView
+                android:id="@+id/tv_category_des"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                tools:text="为广告人的精彩创意点赞"
+                />
+
+        </LinearLayout>
     </FrameLayout>
 
     <include layout="@layout/common_toolbar"/>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginTop="250dp"
             android:orientation="vertical"
+
             >
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="最新更新内容"
-                android:paddingTop="@dimen/default_padding"
-                android:paddingBottom="@dimen/default_padding"
-                />
+                android:paddingTop="@dimen/default_margin"
+                android:paddingBottom="@dimen/default_margin"
+                android:background="@color/white"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="最新更新内容"
+                    android:textSize="@dimen/middle_text"
+                    android:textStyle="bold"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/game_right_arrow"
+                    android:layout_marginRight="@dimen/default_margin"
+                    />
+            </RelativeLayout>
 
             //使用画廊
             <!--<android.support.v7.widget.RecyclerView-->
@@ -60,6 +102,7 @@
                 android:clipChildren="false"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:background="@color/white"
                 >
 
                 <android.support.v4.view.ViewPager
@@ -67,8 +110,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:clipChildren="false"
-                    android:layout_marginLeft="45dp"
-                    android:layout_marginRight="45dp"
+                    android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginRight="@dimen/default_margin"
                     />
             </LinearLayout>
 
@@ -83,6 +126,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="最受欢迎内容"
+                android:background="@color/white"
+                android:textSize="@dimen/middle_text"
+                android:textStyle="bold"
                 android:paddingTop="@dimen/default_padding"
                 android:paddingBottom="@dimen/default_padding"
                 />
@@ -92,10 +138,67 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@color/common_gray"
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/default_margin"
+                android:paddingBottom="@dimen/default_margin"
+                android:gravity="center"
+                android:background="@color/white"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/small_text"
+                    android:text="查看更多最受欢迎文章"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_margin"
+                    android:src="@mipmap/game_right_arrow"
+                    android:layout_marginRight="@dimen/default_margin"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/gray"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="分类热门作者"
+                android:textSize="@dimen/middle_text"
+                android:textStyle="bold"
+                android:background="@color/white"
+                android:paddingTop="@dimen/default_padding"
+                android:paddingBottom="@dimen/default_padding"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_hotauthorcontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                />
+
+            <!--解决nestView无法滑倒低端-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@color/background_light"/>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
 
 </FrameLayout>
