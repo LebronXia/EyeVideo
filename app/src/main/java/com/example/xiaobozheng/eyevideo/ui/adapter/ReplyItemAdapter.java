@@ -39,4 +39,14 @@ public class ReplyItemAdapter extends RecyclerArrayAdapter<Replies.ReplyListBean
             }
         };
     }
+
+//    @Override
+//    public void onViewRecycled(BaseViewHolder holder) {
+//        if(holder instanceof  EntityViewHolder) {
+//            if(((EntityViewHolder)holder).timer != null) {
+//                ((EntityViewHolder) holder).timer.cancel();
+//            }
+//        }
+//        super.onViewRecycled(holder);
+//    }
 }

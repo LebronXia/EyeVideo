@@ -106,14 +106,32 @@ public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> i
         }
        jcVideoPlayerStandard.looping = true;
 
+        onRefresh();
+
     }
 
     @Override
     public void initViews(Bundle savedInstanceState) {
         SetTranslanteBar();
         initAdapter(ReplyItemAdapter.class, false, true);
+        initHeaderView();
 
-        onRefresh();
+        if (item.data.author == null){
+            mHeaderViewHolder.mRlAuthorView.setVisibility(View.GONE);
+        } else {
+            Glide.with(mContext)
+                    .load(item.data.author.getIcon())
+                    .placeholder(R.mipmap.avatar_default)
+                    .transform(new GlideCircleTransform(MovieDetailActivity.this))
+                    .into(mHeaderViewHolder.mIvAuthorAvatar);
+            mHeaderViewHolder.mTvAuthorName.setText(item.data.author.getName());
+            mHeaderViewHolder.mTvAuthorCounts.setText(item.data.author.getVideoNum() + "个视频");
+            mHeaderViewHolder.mTvAuthorDescription.setText(item.data.author.getDescription());
+        }
+        mHeaderViewHolder.mTvMovieTitle.setText(item.data.title);
+        mHeaderViewHolder.mTvMovieType.setText(item.data.category + " / " + TimeUtils.secToTime(item.data.duration));
+        mHeaderViewHolder.mTvMovieDescription.setText(item.data.description);
+
     }
 
     //初始化头部
@@ -133,21 +151,6 @@ public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> i
             }
         });
 
-        if (item.data.author == null){
-            mHeaderViewHolder.mRlAuthorView.setVisibility(View.GONE);
-        } else {
-            Glide.with(mContext)
-                    .load(item.data.author.getIcon())
-                    .placeholder(R.mipmap.avatar_default)
-                    .transform(new GlideCircleTransform(MovieDetailActivity.this))
-                    .into(mHeaderViewHolder.mIvAuthorAvatar);
-            mHeaderViewHolder.mTvAuthorName.setText(item.data.author.getName());
-            mHeaderViewHolder.mTvAuthorCounts.setText(item.data.author.getVideoNum() + "个视频");
-            mHeaderViewHolder.mTvAuthorDescription.setText(item.data.author.getDescription());
-        }
-        mHeaderViewHolder.mTvMovieTitle.setText(item.data.title);
-        mHeaderViewHolder.mTvMovieType.setText(item.data.category + " / " + TimeUtils.secToTime(item.data.duration));
-        mHeaderViewHolder.mTvMovieDescription.setText(item.data.description);
     }
 
     //点击播放视频
@@ -171,7 +174,6 @@ public class MovieDetailActivity extends BaseRVActivity<Replies.ReplyListBean> i
     public void showMovieDetailRplies(List<Replies.ReplyListBean> replyList) {
 
         mAdapter.addAll(replyList);
-        initHeaderView();
         if (replyList.size() != 0){
             lastId = replyList.get(replyList.size() - 1).getSequence();
         }
