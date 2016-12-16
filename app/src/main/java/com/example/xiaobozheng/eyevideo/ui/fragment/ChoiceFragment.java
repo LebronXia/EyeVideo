@@ -116,7 +116,5 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewI
         RecycleViewItemData recycleViewItemData = mAdapter.getItem(position);
         final ItemList itemList = (ItemList) recycleViewItemData.getT();
 
-
-
     }
 }

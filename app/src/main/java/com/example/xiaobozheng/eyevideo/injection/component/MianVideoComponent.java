@@ -1,6 +1,8 @@
 package com.example.xiaobozheng.eyevideo.injection.component;
 
+import com.example.xiaobozheng.eyevideo.ui.activity.MainContentActivity;
 import com.example.xiaobozheng.eyevideo.ui.activity.MovieDetailActivity;
+import com.example.xiaobozheng.eyevideo.ui.activity.SearchActivity;
 import com.example.xiaobozheng.eyevideo.ui.activity.SpecialDetailActivity;
 import com.example.xiaobozheng.eyevideo.ui.fragment.ChoiceFragment;
 import com.example.xiaobozheng.eyevideo.ui.fragment.SpecialFragment;
@@ -20,4 +22,8 @@ public interface MianVideoComponent {
     MovieDetailActivity inject(MovieDetailActivity movieDetailActivity);
 
     SpecialDetailActivity inject(SpecialDetailActivity specialActivity);
+
+    MainContentActivity inject(MainContentActivity mainContentActivity);
+
+    SearchActivity inject(SearchActivity searchActivity);
 }

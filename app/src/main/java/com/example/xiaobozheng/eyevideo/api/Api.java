@@ -3,9 +3,12 @@ package com.example.xiaobozheng.eyevideo.api;
 import com.example.xiaobozheng.eyevideo.app.Constant;
 import com.example.xiaobozheng.eyevideo.model.Daily;
 import com.example.xiaobozheng.eyevideo.model.Discover;
+import com.example.xiaobozheng.eyevideo.model.Interesting;
 import com.example.xiaobozheng.eyevideo.model.Replies;
 import com.example.xiaobozheng.eyevideo.model.SectionList;
 import com.example.xiaobozheng.eyevideo.model.SpecialData;
+
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -92,5 +95,22 @@ public class Api {
         return mApiService.getSpecialData(id);
     }
 
+    /**
+     * 获取每个专题的内容
+     * @param start
+     * @param category
+     * @param strategy
+     * @return
+     */
+    public Observable<Interesting> getInteresting(int start, int category, String strategy){
+        return mApiService.getInteresting(start, category, strategy);
+    }
 
+    /**
+     * 获取热门搜索词
+     * @return
+     */
+    public Observable<List<String>> getTrendingTag(){
+        return mApiService.getTrendingTag();
+    }
 }

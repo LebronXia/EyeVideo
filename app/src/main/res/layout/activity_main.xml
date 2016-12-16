@@ -6,7 +6,6 @@
     xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="com.example.xiaobozheng.eyevideo.ui.activity.MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -15,7 +14,8 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         >
 
-        <include layout="@layout/common_toolbar"/>
+        <include layout="@layout/common_toolbar"
+            />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -23,6 +23,7 @@
         android:id="@+id/frame_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 

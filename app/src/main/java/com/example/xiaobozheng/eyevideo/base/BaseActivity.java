@@ -21,6 +21,7 @@ import com.example.xiaobozheng.eyevideo.R;
 import com.example.xiaobozheng.eyevideo.app.EyeVideoApplication;
 import com.example.xiaobozheng.eyevideo.injection.component.AppComponent;
 import com.example.xiaobozheng.eyevideo.widget.StatusBarCompat;
+import com.example.xiaobozheng.eyevideo.widget.loadding.CustomDialog;
 
 import butterknife.ButterKnife;
 
@@ -34,6 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public Toolbar mCommonToolbar;
 
     protected Context mContext;
+    private CustomDialog dialog;//进度条
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 //            window.setNavigationBarColor(Color.TRANSPARENT);
 //        }
         // 无标题
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+      //  requestWindowFeature(Window.FEATURE_NO_TITLE);
         // 设置竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         // 默认着色状态栏
@@ -106,5 +108,30 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         ButterKnife.unbind(this);
        // dismissDialog();
+    }
+
+    // dialog
+    public CustomDialog getDialog() {
+        if (dialog == null) {
+            dialog = CustomDialog.instance(this);
+            dialog.setCancelable(true);
+        }
+        return dialog;
+    }
+
+    public void hideDialog() {
+        if (dialog != null)
+            dialog.hide();
+    }
+
+    public void showDialog() {
+        getDialog().show();
+    }
+
+    public void dismissDialog() {
+        if (dialog != null) {
+            dialog.dismiss();
+            dialog = null;
+        }
     }
 }

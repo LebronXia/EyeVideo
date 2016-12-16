@@ -4,10 +4,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +34,7 @@ import com.example.xiaobozheng.eyevideo.ui.presenter.SpeicalDetailPresenter;
 import com.example.xiaobozheng.eyevideo.ui.support.ZoomOutPageTransformer;
 import com.example.xiaobozheng.eyevideo.util.ScreenUtil;
 import com.example.xiaobozheng.eyevideo.widget.RatioImageView;
+import com.orhanobut.logger.Logger;
 
 import org.w3c.dom.Text;
 
@@ -41,7 +45,9 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.BindInt;
+import butterknife.OnClick;
 
+import static android.R.attr.data;
 import static android.R.attr.id;
 import static android.R.attr.tabStripEnabled;
 import static java.security.AccessController.getContext;
@@ -50,7 +56,7 @@ import static java.security.AccessController.getContext;
  * Created by Riane on 2016/12/11.
  */
 
-public class SpecialDetailActivity extends BaseActivity implements SpecialDetailContract.View, ViewPager.OnPageChangeListener{
+public class SpecialDetailActivity extends BaseActivity implements SpecialDetailContract.View{
     public static final String EXTRA_SPECIAL_ITEMLIST = "extra_special_itemlist";
 
     @Bind(R.id.vp_update_content)
@@ -67,6 +73,13 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
     TextView mTvCategoryDes;
     @Bind(R.id.iv_category_pic)
     RatioImageView mIvCategoryPic;
+    @Bind(R.id.tv_toolbar_title)
+    TextView mTvToolBarTitle;
+    @Bind(R.id.nsv_speicaldetail)
+    NestedScrollView mNestedScrollView;
+    @Bind(R.id.ll_nestedScrollView)
+    LinearLayout mLlNestedScrollView;
+
     private ItemList mItemList;
     private GalleryPageAdapter mPageAdapter;
     //头部图片
@@ -90,7 +103,7 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
 
     @Override
     public void initToolBar() {
-
+        mCommonToolbar.setTitle("");
     }
 
     @Override
@@ -108,13 +121,27 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-
+        //设置透明栏
+        SetTranslanteBar();
+        //mCommonToolbar.setVisibility(View.GONE);
+        //隐藏标题栏标题
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mTvToolBarTitle.setText(mItemList.data.title);
+        mCommonToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        showDialog();
         mPageAdapter = new GalleryPageAdapter(SpecialDetailActivity.this);
         mViewPager.setPageMargin(getResources().getDimensionPixelSize(R.dimen.default_margin));
         //限定预加载的页面个数
         mViewPager.setOffscreenPageLimit(3);
         // mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
        // mViewPager.addOnPageChangeListener(this);
+       // mViewPager.setOnClickListener();
 
         //setHasFixedSize()方法用来使RecyclerView保持固定的大小，该信息被用于自身的优化
         mHotLikedRecyclerView.setHasFixedSize(true);
@@ -128,8 +155,24 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
         mHotAuthorAdapter = new HotAuthorAdapter(mContext, mHotAuthorLists);
         mHotAuthorRecycleView.setAdapter(mHotAuthorAdapter);
         mHotAuthorRecycleView.setNestedScrollingEnabled(false);
-        mSpeicalDetailPresenter.getSpecialDetailData(mItemList.data.id);
 
+        mNestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                Logger.d(getHeaderLinearlayout() + "LinearLayout的底部高度");
+            }
+        });
+        mSpeicalDetailPresenter.getSpecialDetailData(mItemList.data.id);
+    }
+
+    @OnClick(R.id.rv_lately_content)
+    public void OnRvLatelyContentClick(){
+        startActivity(MainContentActivity.newIntent(mContext, mItemList.data.id, "date"));
+    }
+
+    @OnClick(R.id.ll_liked_content)
+    public void OnLlLikedCOntentClick(){
+        startActivity(MainContentActivity.newIntent(mContext, mItemList.data.id, "shareCount"));
     }
 
     @Override
@@ -160,31 +203,24 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
 
     }
 
+    /**
+     * 获取scrollView里的布局高度
+     * @return
+     */
+    private int getHeaderLinearlayout(){
+        int distance = mLlNestedScrollView.getTop();
+        distance = Math.abs(distance);
+        return distance;
+    }
     @Override
     public void showError() {
-
+        dismissDialog();
     }
 
     @Override
     public void complete() {
-
+        dismissDialog();
     }
 
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            mLlViewPager.invalidate();
-        }
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
 }

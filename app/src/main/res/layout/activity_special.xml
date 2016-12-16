@@ -47,15 +47,29 @@
         </LinearLayout>
     </FrameLayout>
 
-    <include layout="@layout/common_toolbar"/>
+    <include layout="@layout/common_toolbar"
+        />
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/ib_back"-->
+        <!--android:layout_width="58dp"-->
+        <!--android:layout_height="56dp"-->
+        <!--android:background="?selectableItemBackgroundBorderless"-->
+        <!--android:elevation="6dp"-->
+        <!--android:src="@drawable/ic_arrow_back_white_24px"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--tools:ignore="ContentDescription"-->
+        <!--/>-->
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nsv_speicaldetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         >
 
         <LinearLayout
+            android:id="@+id/ll_nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="250dp"
@@ -64,6 +78,7 @@
             >
 
             <RelativeLayout
+                android:id="@+id/rv_lately_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/default_margin"
@@ -110,8 +125,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:clipChildren="false"
-                    android:layout_marginLeft="@dimen/default_margin"
-                    android:layout_marginRight="@dimen/default_margin"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     />
             </LinearLayout>
 
@@ -142,6 +157,7 @@
                 />
 
             <LinearLayout
+                android:id="@+id/ll_liked_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/default_margin"

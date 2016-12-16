@@ -3,8 +3,8 @@ package com.example.xiaobozheng.eyevideo.ui.presenter;
 import com.example.xiaobozheng.eyevideo.api.Api;
 import com.example.xiaobozheng.eyevideo.base.BaseRxPresenter;
 import com.example.xiaobozheng.eyevideo.model.ItemList;
-import com.example.xiaobozheng.eyevideo.model.Replies;
 import com.example.xiaobozheng.eyevideo.ui.contract.MainContentContract;
+import com.example.xiaobozheng.eyevideo.ui.contract.SearchContract;
 
 import java.util.List;
 
@@ -15,28 +15,25 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static android.R.attr.id;
-
 /**
- * Created by xiaobozheng on 12/15/2016.
+ * Created by xiaobozheng on 12/16/2016.
  */
 
-public class MainContentPresenter extends BaseRxPresenter<MainContentContract.View> implements MainContentContract.Presenter{
+public class SearchPresenter extends BaseRxPresenter<SearchContract.View> implements SearchContract.Presenter{
 
-    private Api mApi;
+    private Api mAPi;
 
     @Inject
-    public MainContentPresenter(Api api){
-        this.mApi = api;
+    public SearchPresenter(Api api){
+        this.mAPi = api;
     }
     @Override
-    public void getInteresting(int start, int categoryId, String strategy, boolean isRefresh) {
-        Subscription rxSubscription = mApi.getInteresting(start, categoryId, strategy)
-                .map(interesting -> interesting.itemList)
+    public void getTrendingTags() {
+        Subscription rxSubscription = mAPi.getTrendingTag()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<ItemList> >() {
+                .subscribe(new Observer<List<String> >() {
                     @Override
                     public void onCompleted() {
                         mView.complete();
@@ -48,10 +45,11 @@ public class MainContentPresenter extends BaseRxPresenter<MainContentContract.Vi
                     }
 
                     @Override
-                    public void onNext(List<ItemList> itemLists) {
-                        mView.showInterestingData(itemLists , isRefresh);
+                    public void onNext(List<String> trendingTags) {
+                        mView.showTrendingTags(trendingTags);
                     }
                 });
         addSubscrebe(rxSubscription);
+
     }
 }

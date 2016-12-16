@@ -1,11 +1,14 @@
 package com.example.xiaobozheng.eyevideo.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.xiaobozheng.eyevideo.R;
@@ -56,7 +59,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-
+        mCommonToolbar.setTitle("开眼视频");
+        mCommonToolbar.setTitleTextColor(getResources().getColor(R.color.background_light));
     }
 
     @Override
@@ -230,4 +234,17 @@ public class MainActivity extends BaseActivity {
         }, 500);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_search){
+            startActivity(new Intent(MainActivity.this, SearchActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

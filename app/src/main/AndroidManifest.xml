@@ -29,6 +29,10 @@
             />
 
         <activity android:name=".ui.activity.SpecialDetailActivity"/>
+
+        <activity android:name=".ui.activity.MainContentActivity"/>
+
+        <activity android:name=".ui.activity.SearchActivity"/>
     </application>
 
 </manifest>
