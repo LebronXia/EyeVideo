@@ -4,6 +4,7 @@ import com.example.xiaobozheng.eyevideo.model.Daily;
 import com.example.xiaobozheng.eyevideo.model.Discover;
 import com.example.xiaobozheng.eyevideo.model.Interesting;
 import com.example.xiaobozheng.eyevideo.model.Replies;
+import com.example.xiaobozheng.eyevideo.model.SearchResult;
 import com.example.xiaobozheng.eyevideo.model.SectionList;
 import com.example.xiaobozheng.eyevideo.model.SpecialData;
 
@@ -53,6 +54,10 @@ public interface ApiService {
     @GET("v3/queries/hot")
     Observable<List<String>> getTrendingTag();
 
-//    @GET("v1/search?num=10")
-//    Observable<>
+    @GET("v1/search?num=10")
+    Observable<SearchResult> queryByKey(@Query("query") String key, @Query("start") int start);
+
+    //http://baobab.kaiyanapp.com/api/v3/pgc/videos?pgcId=156&strategy=date （作者列表）
+
+
 }

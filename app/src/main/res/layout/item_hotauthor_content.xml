@@ -5,6 +5,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+    <RelativeLayout
+        android:id="@+id/rl_anthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
     <ImageView
         android:id="@+id/iv_hotauthor_avatar"
         android:layout_width="48dp"
@@ -32,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_hotauthor_name"
         android:layout_toRightOf="@id/iv_hotauthor_avatar"
+        android:layout_toLeftOf="@+id/iv_right_arrow"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:singleLine="true"
@@ -39,11 +48,24 @@
         tools:text="精彩震撼视效左丕集合"
         />
 
+    <ImageView
+        android:id="@+id/iv_right_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/default_margin"
+        android:src="@mipmap/game_right_arrow"
+
+        />
+
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_hotauthor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_hotauthor_avatar"
+        android:layout_below="@id/rl_anthor"
         android:layout_centerVertical="true"
         android:background="@color/white"
         android:scrollbars="none"

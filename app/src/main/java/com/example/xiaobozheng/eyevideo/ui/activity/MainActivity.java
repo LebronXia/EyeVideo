@@ -47,6 +47,7 @@ public class MainActivity extends BaseActivity {
     private String[] mTitles = {"精选", "专题", "发现"};
     private int[] mIconUnselectIds = {R.mipmap.found, R.mipmap.special, R.mipmap.fancy};
     private int[] mIconSeclectIds = {R.mipmap.found_select, R.mipmap.special_select, R.mipmap.fancy_select};
+
     //底部的高度
     private static int tablayoutHeight;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
@@ -84,7 +85,7 @@ public class MainActivity extends BaseActivity {
         SetTranslanteBar();
         //根据悬浮按钮来隐藏底部栏
         scaleDownShowFab = ScaleDownShowBehavior.from(mFloatingActionButton);
-        scaleDownShowFab.setOnStateChangedListener(onStateChangedListener);
+       scaleDownShowFab.setOnStateChangedListener(onStateChangedListener);
         mBottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.tab_layout));
         //初始化菜单
         initTab();
@@ -209,7 +210,7 @@ public class MainActivity extends BaseActivity {
             initialize = true;
 
             hideFAB();
-            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+           mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         }
     }

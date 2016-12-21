@@ -4,6 +4,8 @@
     <string name="toolbar_search_title">帮你找到感兴趣的视频</string>
     <string name="search_title">输入标题或描述中的关键词找到更多视频</string>
     <string name="search_hot">热门搜索词</string>
+
+    <string name="author_detail_share">%1$s个视频&#160;/&#160;%2$s次收藏&#160;/&#160;%3$s次分享</string>
     <string name="scale_up_show_behavior">com.example.xiaobozheng.eyevideo.ui.support.ScaleUpShowBehavior</string>
     <string name="scale_down_show_behavior">com.example.xiaobozheng.eyevideo.ui.support.ScaleDownShowBehavior</string>
 

@@ -19,9 +19,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
+ * 最新更新内容和最受欢迎内容
  * Created by xiaobozheng on 12/15/2016.
  */
-
 public class MainContentActivity extends BaseRVActivity<ItemList> implements MainContentContract.View {
 
     private static final String EXTRA_Id = "maincontent_extra_id";

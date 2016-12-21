@@ -5,6 +5,7 @@ import com.example.xiaobozheng.eyevideo.ui.activity.MovieDetailActivity;
 import com.example.xiaobozheng.eyevideo.ui.activity.SearchActivity;
 import com.example.xiaobozheng.eyevideo.ui.activity.SpecialDetailActivity;
 import com.example.xiaobozheng.eyevideo.ui.fragment.ChoiceFragment;
+import com.example.xiaobozheng.eyevideo.ui.fragment.SearchFragment;
 import com.example.xiaobozheng.eyevideo.ui.fragment.SpecialFragment;
 
 import dagger.Component;
@@ -25,5 +26,5 @@ public interface MianVideoComponent {
 
     MainContentActivity inject(MainContentActivity mainContentActivity);
 
-    SearchActivity inject(SearchActivity searchActivity);
+    SearchFragment inject(SearchFragment searchFragment);
 }

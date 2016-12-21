@@ -5,6 +5,7 @@ import com.example.xiaobozheng.eyevideo.model.Daily;
 import com.example.xiaobozheng.eyevideo.model.Discover;
 import com.example.xiaobozheng.eyevideo.model.Interesting;
 import com.example.xiaobozheng.eyevideo.model.Replies;
+import com.example.xiaobozheng.eyevideo.model.SearchResult;
 import com.example.xiaobozheng.eyevideo.model.SectionList;
 import com.example.xiaobozheng.eyevideo.model.SpecialData;
 
@@ -112,5 +113,9 @@ public class Api {
      */
     public Observable<List<String>> getTrendingTag(){
         return mApiService.getTrendingTag();
+    }
+
+    public Observable<SearchResult> queryByKey(String key, int start){
+        return mApiService.queryByKey(key, start);
     }
 }
