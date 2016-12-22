@@ -1,6 +1,7 @@
 package com.example.xiaobozheng.eyevideo.api;
 
 import com.example.xiaobozheng.eyevideo.app.Constant;
+import com.example.xiaobozheng.eyevideo.model.AuthorDetailData;
 import com.example.xiaobozheng.eyevideo.model.Daily;
 import com.example.xiaobozheng.eyevideo.model.Discover;
 import com.example.xiaobozheng.eyevideo.model.Interesting;
@@ -115,7 +116,24 @@ public class Api {
         return mApiService.getTrendingTag();
     }
 
+    /**
+     * 根据关键字查找
+     * @param key
+     * @param start
+     * @return
+     */
     public Observable<SearchResult> queryByKey(String key, int start){
         return mApiService.queryByKey(key, start);
     }
+
+    /**
+     * 获取作者详情页的数据
+     * @param authorId
+     * @param strategy
+     * @return
+     */
+    public Observable<AuthorDetailData> getAuthorDetailData(int authorId, String strategy){
+        return mApiService.getAuthorDetailData(authorId, strategy);
+    }
+
 }

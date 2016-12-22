@@ -1,5 +1,7 @@
 package com.example.xiaobozheng.eyevideo.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +22,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.xiaobozheng.eyevideo.R;
 import com.example.xiaobozheng.eyevideo.base.BaseActivity;
 import com.example.xiaobozheng.eyevideo.base.BaseRVActivity;
+import com.example.xiaobozheng.eyevideo.common.OnRvItemClickListener;
 import com.example.xiaobozheng.eyevideo.injection.component.AppComponent;
 import com.example.xiaobozheng.eyevideo.injection.component.DaggerMianVideoComponent;
 import com.example.xiaobozheng.eyevideo.model.CategoryInfo;
@@ -56,8 +59,9 @@ import static java.security.AccessController.getContext;
  * Created by Riane on 2016/12/11.
  */
 
-public class SpecialDetailActivity extends BaseActivity implements SpecialDetailContract.View{
+public class SpecialDetailActivity extends BaseActivity implements SpecialDetailContract.View, OnRvItemClickListener{
     public static final String EXTRA_SPECIAL_ITEMLIST = "extra_special_itemlist";
+
 
     @Bind(R.id.vp_update_content)
     ViewPager mViewPager;
@@ -153,13 +157,14 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
         mHotAuthorRecycleView.setHasFixedSize(true);
         mHotAuthorRecycleView.setLayoutManager(new LinearLayoutManager(this));
         mHotAuthorAdapter = new HotAuthorAdapter(mContext, mHotAuthorLists);
+        mHotAuthorAdapter.setOnItemClickListener(this);
         mHotAuthorRecycleView.setAdapter(mHotAuthorAdapter);
         mHotAuthorRecycleView.setNestedScrollingEnabled(false);
 
         mNestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                Logger.d(getHeaderLinearlayout() + "LinearLayout的底部高度");
+               // Logger.d(getHeaderLinearlayout() + "LinearLayout的底部高度");
             }
         });
         mSpeicalDetailPresenter.getSpecialDetailData(mItemList.data.id);
@@ -203,15 +208,25 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
 
     }
 
-    /**
-     * 获取scrollView里的布局高度
-     * @return
-     */
-    private int getHeaderLinearlayout(){
-        int distance = mLlNestedScrollView.getTop();
-        distance = Math.abs(distance);
-        return distance;
+    @Override
+    public void onItemClick(View view, int position, Object data) {
+        if (data instanceof ItemList){
+            startActivity(AuthorActivity.newIntent(SpecialDetailActivity.this, ((ItemList)data).data.id));
+        }
+
     }
+
+
+
+//    /**
+//     * 获取scrollView里的布局高度
+//     * @return
+//     */
+//    private int getHeaderLinearlayout(){
+//        int distance = mLlNestedScrollView.getTop();
+//        distance = Math.abs(distance);
+//        return distance;
+//    }
     @Override
     public void showError() {
         dismissDialog();

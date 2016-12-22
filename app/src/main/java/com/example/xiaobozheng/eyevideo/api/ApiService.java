@@ -1,8 +1,10 @@
 package com.example.xiaobozheng.eyevideo.api;
 
+import com.example.xiaobozheng.eyevideo.model.AuthorDetailData;
 import com.example.xiaobozheng.eyevideo.model.Daily;
 import com.example.xiaobozheng.eyevideo.model.Discover;
 import com.example.xiaobozheng.eyevideo.model.Interesting;
+import com.example.xiaobozheng.eyevideo.model.ItemList;
 import com.example.xiaobozheng.eyevideo.model.Replies;
 import com.example.xiaobozheng.eyevideo.model.SearchResult;
 import com.example.xiaobozheng.eyevideo.model.SectionList;
@@ -40,7 +42,7 @@ public interface ApiService {
     @GET("v3/discovery")
     Observable<Discover> getDiscover();
 
-    //获取发现专题下的各个小专题
+    //获取发现专题下的各个小专题详情
     @GET("v3/categories/detail")
     Observable<SpecialData> getSpecialData(@Query("id") int id);
 
@@ -58,6 +60,8 @@ public interface ApiService {
     Observable<SearchResult> queryByKey(@Query("query") String key, @Query("start") int start);
 
     //http://baobab.kaiyanapp.com/api/v3/pgc/videos?pgcId=156&strategy=date （作者列表）
-
+    //获取作者的视频列表
+    @GET("v3/pgc/videos")
+    Observable<AuthorDetailData> getAuthorDetailData(@Query("id") int id, @Query("strategy") String strategy);
 
 }
