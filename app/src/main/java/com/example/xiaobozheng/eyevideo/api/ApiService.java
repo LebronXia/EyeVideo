@@ -62,6 +62,6 @@ public interface ApiService {
     //http://baobab.kaiyanapp.com/api/v3/pgc/videos?pgcId=156&strategy=date （作者列表）
     //获取作者的视频列表
     @GET("v3/pgc/videos")
-    Observable<AuthorDetailData> getAuthorDetailData(@Query("id") int id, @Query("strategy") String strategy);
+    Observable<AuthorDetailData> getAuthorDetailData(@Query("start") int start, @Query("pgcId") int pgcId, @Query("strategy") String strategy);
 
 }

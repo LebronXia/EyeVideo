@@ -12,6 +12,6 @@ public interface AuthorDetailContract {
     }
 
     interface Presenter extends BaseContract.BasePresenter<View>{
-        void getAuthorDetaukData(int authorId, String strategy, boolean isRefresh);
+        void getAuthorDetaukData(int start, int authorId, String strategy, boolean isRefresh);
     }
 }

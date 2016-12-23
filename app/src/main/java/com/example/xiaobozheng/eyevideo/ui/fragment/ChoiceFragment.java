@@ -46,7 +46,6 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewI
                 .inject(this);
     }
 
-
     @Override
     public void initDatas() {
 

@@ -12,6 +12,7 @@ import com.example.xiaobozheng.eyevideo.model.ItemList;
 import com.example.xiaobozheng.eyevideo.ui.adapter.InterestingItemAdapter;
 import com.example.xiaobozheng.eyevideo.ui.contract.MainContentContract;
 import com.example.xiaobozheng.eyevideo.ui.presenter.MainContentPresenter;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,8 @@ public class MainContentActivity extends BaseRVActivity<ItemList> implements Mai
     public void initDatas() {
         categoryId = getIntent().getIntExtra(EXTRA_Id , 0);
         strategy = getIntent().getStringExtra(EXTRA_TYPE);
+
+        Logger.d(strategy);
     }
 
     @Override

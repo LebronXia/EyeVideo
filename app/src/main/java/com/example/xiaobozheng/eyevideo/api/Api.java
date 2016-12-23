@@ -132,8 +132,8 @@ public class Api {
      * @param strategy
      * @return
      */
-    public Observable<AuthorDetailData> getAuthorDetailData(int authorId, String strategy){
-        return mApiService.getAuthorDetailData(authorId, strategy);
+    public Observable<AuthorDetailData> getAuthorDetailData(int start, int authorId, String strategy){
+        return mApiService.getAuthorDetailData(start, authorId, strategy);
     }
 
 }
