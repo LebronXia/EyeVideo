@@ -211,7 +211,8 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
     @Override
     public void onItemClick(View view, int position, Object data) {
         if (data instanceof ItemList){
-            startActivity(AuthorActivity.newIntent(SpecialDetailActivity.this, ((ItemList)data).data.id));
+            startActivity(AuthorActivity.newIntent(SpecialDetailActivity.this, ((ItemList)data).data.header.id));
+            Logger.d(((ItemList)data).data.header.id + "ItemList的作者Id");
         }
 
     }

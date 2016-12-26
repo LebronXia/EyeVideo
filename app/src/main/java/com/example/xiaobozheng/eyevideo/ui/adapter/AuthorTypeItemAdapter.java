@@ -14,10 +14,12 @@ import com.example.xiaobozheng.eyevideo.ui.fragment.AuthorTypeFragment;
 public class AuthorTypeItemAdapter extends FragmentPagerAdapter{
     private static final int PAGE_COUNT = 2;
     private int mAuthorId;
+    private Context mContext;
 
     public AuthorTypeItemAdapter(Context context, FragmentManager fm, int authorId) {
         super(fm);
         this.mAuthorId = authorId;
+        this.mContext = context;
     }
 
     @Override
@@ -28,10 +30,10 @@ public class AuthorTypeItemAdapter extends FragmentPagerAdapter{
                 type = "date";
                 break;
             case 1:
-                type = " shareCount";
+                type = "shareCount";
                 break;
         }
-        return new AuthorTypeFragment().newInstance(mAuthorId, type);
+        return AuthorTypeFragment.newInstance(mAuthorId, type);
     }
 
     @Override

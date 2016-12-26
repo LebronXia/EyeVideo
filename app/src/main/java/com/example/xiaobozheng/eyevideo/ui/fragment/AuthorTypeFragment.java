@@ -13,11 +13,14 @@ import com.example.xiaobozheng.eyevideo.ui.activity.AuthorActivity;
 import com.example.xiaobozheng.eyevideo.ui.adapter.InterestingItemAdapter;
 import com.example.xiaobozheng.eyevideo.ui.contract.AuthorDetailContract;
 import com.example.xiaobozheng.eyevideo.ui.presenter.AuthorDetailPresenter;
+import com.example.xiaobozheng.eyevideo.ui.view.recyclerview.EasyRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import butterknife.Bind;
 
 import static android.R.attr.type;
 
@@ -27,8 +30,11 @@ import static android.R.attr.type;
  */
 public class AuthorTypeFragment extends BaseRVFragment<AuthorDetailPresenter, ItemList> implements AuthorDetailContract.View{
     private static final String EXTRA_TYPE = "maincontent_extra_type";
+
     private List<ItemList> mAuthorList = new ArrayList<>();
+    //作者Id
     private int categoryId;
+    //Fragment的类型
     private String strategy;
     private int start = 0;
 
@@ -56,7 +62,8 @@ public class AuthorTypeFragment extends BaseRVFragment<AuthorDetailPresenter, It
 
     @Override
     public void initDatas() {
-
+        categoryId = getArguments().getInt(AuthorActivity.EXTRA_SPECIAL_AUTHOR_ID);
+        strategy = getArguments().getString(EXTRA_TYPE);
     }
 
     @Override
@@ -68,7 +75,7 @@ public class AuthorTypeFragment extends BaseRVFragment<AuthorDetailPresenter, It
     @Override
     public void showAuthorDetailData(AuthorDetailData authorDetailData, boolean isRefresh) {
         if (authorDetailData == null ) return;
-        authorDetailData.itemList.clear();
+        mAuthorList.clear();
         if (isRefresh){
             mAdapter.clear();
         }
@@ -98,11 +105,11 @@ public class AuthorTypeFragment extends BaseRVFragment<AuthorDetailPresenter, It
 
     @Override
     public void showError() {
-
+        loaddingError();
     }
 
     @Override
     public void complete() {
-
+        mRecyclerView.setRefreshing(false);
     }
 }

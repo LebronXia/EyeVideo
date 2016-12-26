@@ -47,7 +47,7 @@ public class AuthorActivity extends BaseActivity implements AuthorDetailContract
     TabLayout mAuthorTabLayout;
     @Bind(R.id.vp_author)
     ViewPager mAuthorViewpager;
-    private FragmentPagerAdapter mAdapter;
+    private AuthorTypeItemAdapter mAdapter;
     //private ArrayList<Fragment> fragments = new ArrayList<>(2);
 
     private int mAuthorId;
@@ -117,6 +117,8 @@ public class AuthorActivity extends BaseActivity implements AuthorDetailContract
         //滑动的Adapter适配器
         mAdapter = new AuthorTypeItemAdapter(mContext, getSupportFragmentManager(), mAuthorId);
         mAuthorViewpager.setAdapter(mAdapter);
+        mAuthorTabLayout.setupWithViewPager(mAuthorViewpager);
+
         //通过请求预先获得作者列表的信息，所以参数写死
         mAuthorDetailPresenter.getAuthorDetaukData(0, mAuthorId, "date", false);
 
@@ -131,7 +133,7 @@ public class AuthorActivity extends BaseActivity implements AuthorDetailContract
 
     public static Intent newIntent(Context context, int authorId){
         Intent intent = new Intent(context, AuthorActivity.class);
-        intent.putExtra(EXTRA_SPECIAL_AUTHOR_ID, id);
+        intent.putExtra(EXTRA_SPECIAL_AUTHOR_ID, authorId);
         return intent;
     }
 

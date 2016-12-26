@@ -9,6 +9,7 @@ import java.util.List;
 public class AuthorDetailData {
     public List<ItemList> itemList;
     public PgcInfo pgcInfo;
+    public String nextPageUrl;
 
     public static class PgcInfo{
         public int id;
