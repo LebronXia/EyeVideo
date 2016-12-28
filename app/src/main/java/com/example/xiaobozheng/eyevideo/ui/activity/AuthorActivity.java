@@ -3,10 +3,14 @@ package com.example.xiaobozheng.eyevideo.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +23,7 @@ import com.example.xiaobozheng.eyevideo.model.AuthorDetailData;
 import com.example.xiaobozheng.eyevideo.ui.adapter.AuthorTypeItemAdapter;
 import com.example.xiaobozheng.eyevideo.ui.contract.AuthorDetailContract;
 import com.example.xiaobozheng.eyevideo.ui.presenter.AuthorDetailPresenter;
+import com.example.xiaobozheng.eyevideo.ui.support.AppBarStateChangeListener;
 import com.yuyh.easyadapter.glide.GlideCircleTransform;
 
 import javax.inject.Inject;
@@ -33,8 +38,14 @@ import static android.R.attr.id;
 public class AuthorActivity extends BaseActivity implements AuthorDetailContract.View{
     public static final String EXTRA_SPECIAL_AUTHOR_ID = "extra_special_author_id";
 
+    @Bind(R.id.toolbar_layout)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @Bind(R.id.app_bar)
+    AppBarLayout mAppBarLayout;
     @Bind(R.id.tb_author)
     Toolbar mToolbar;
+    @Bind(R.id.tv_toolbar_title)
+    TextView mToobalTitle;
     @Bind(R.id.iv_author_avatar)
     ImageView mIvAuthorAvatar;
     @Bind(R.id.tv_author_name)
@@ -119,6 +130,27 @@ public class AuthorActivity extends BaseActivity implements AuthorDetailContract
         mAuthorViewpager.setAdapter(mAdapter);
         mAuthorTabLayout.setupWithViewPager(mAuthorViewpager);
 
+        //监听CollapsingToolbarLayout的展开与折叠
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                Log.d("STATE", state.name());
+                if( state == State.EXPANDED ) {
+                    //展开状态
+                    mToobalTitle.setVisibility(View.GONE);
+                    //mPgcInfo
+                }else if(state == State.COLLAPSED){
+                    //折叠状态
+                    mToobalTitle.setVisibility(View.VISIBLE);
+                    mToobalTitle.setText(mPgcInfo.name);
+                }else {
+
+                    //中间状态
+
+                }
+            }
+        });
+
         //通过请求预先获得作者列表的信息，所以参数写死
         mAuthorDetailPresenter.getAuthorDetaukData(0, mAuthorId, "date", false);
 
@@ -151,6 +183,8 @@ public class AuthorActivity extends BaseActivity implements AuthorDetailContract
         mTvAuthorName.setText(authorDetailData.pgcInfo.name);
         mTvAuthorDetail.setText(authorDetailData.pgcInfo.brief);
         mTvAuthorDestription.setText(authorDetailData.pgcInfo.description);
+       //
+        mCollapsingToolbarLayout.setTitle(authorDetailData.pgcInfo.name);
 
     }
 

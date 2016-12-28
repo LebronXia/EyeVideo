@@ -24,10 +24,12 @@ import com.example.xiaobozheng.eyevideo.ui.fragment.SearchFragment;
 import com.example.xiaobozheng.eyevideo.ui.fragment.SearchResultFragment;
 import com.example.xiaobozheng.eyevideo.ui.presenter.SearchPresenter;
 import com.example.xiaobozheng.eyevideo.util.RxBus;
+import com.orhanobut.logger.Logger;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,13 +96,10 @@ public class SearchActivity extends BaseActivity {
         mTvToolbarTitle.setVisibility(View.GONE);
         mFlToolBarSearch.setVisibility(View.VISIBLE);
 
-      //  mContent = new SearchFragment();
+        mContent = new SearchFragment();
 
-        if (savedInstanceState == null){
-            mContent = new SearchFragment();
-            getSupportFragmentManager().beginTransaction().add(R.id.frame_content, mContent).commit();
-        }
-
+        // mContent = new SearchFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_content, mContent).commit();
 
         //设置EditExt监听
         mEtSearch.setOnKeyListener((v, keyCode, event)->{
@@ -111,7 +110,7 @@ public class SearchActivity extends BaseActivity {
                     Toast.makeText(SearchActivity.this,
                             "Keyword must not empty!", Toast.LENGTH_SHORT).show();
                 } else{
-                    startResultActivity(mEtSearch.getText().toString());
+                  //  startResultActivity(mEtSearch.getText().toString());
                 }
             } else if (keyCode == KeyEvent.KEYCODE_BACK){
                 finish();
@@ -119,21 +118,18 @@ public class SearchActivity extends BaseActivity {
             return false;
         });
 
-
         observable.observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>(){
             @Override
             public void call(String s) {
                 switchContent(s);
             }
         });
-
     }
 
     @Override
     public void initDatas() {
 
     }
-
 
     public  void switchContent(String word){
         mSearchRedultFragment = new SearchResultFragment();
@@ -142,29 +138,16 @@ public class SearchActivity extends BaseActivity {
         mSearchRedultFragment.setArguments(args);
         to = mSearchRedultFragment;
         if (mContent != to){
-            mContent = to;
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            if (!to.isAdded()) {	// 先判断是否被add过
-                transaction.hide(mContent).add(R.id.frame_content, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+           // transaction.hide(mContent).add(R.id.frame_content, to).commit();
+            if (!mContent.isAdded()) {	// 先判断是否被add过
+                transaction.hide(mContent).add(R.id.frame_content, to).commitAllowingStateLoss(); // 隐藏当前的fragment，add下一个到Activity中
             } else {
                 transaction.hide(mContent).show(to).commit(); // 隐藏当前的fragment，显示下一个
             }
         }
        // getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, mSearchRedultFragment).commitAllowingStateLoss();
-
     }
-
-//    public void switchContent(Fragment from, Fragment to) {
-//        if (mContent != to) {
-//            mContent = to;
-//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//            if (!to.isAdded()) {	// 先判断是否被add过
-//                transaction.hide(from).add(R.id.frame_content, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
-//            } else {
-//                transaction.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
-//            }
-//        }
-//    }
 
     private void startResultActivity(String keyword){
         Intent intent = new Intent(this,SearchResultActivity.class);
