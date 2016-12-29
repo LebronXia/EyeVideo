@@ -7,16 +7,55 @@
 
     <include layout="@layout/common_toolbar"/>
 
-
-    <FrameLayout
-        android:id="@+id/frame_content"
+    <LinearLayout
+        android:id="@+id/ll_hotsearch"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         >
 
-    </FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/search_title"
+        android:gravity="center"
+        />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_hot"
+            android:textSize="@dimen/middle_text"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:id="@+id/fl_searchword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="16dp"
+        app:max_select="1"
+        />
+
+    </LinearLayout>
+
+    <com.example.xiaobozheng.eyevideo.ui.view.recyclerview.EasyRecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_empty="@layout/common_empty_view"
+        app:layout_progress="@layout/common_progress_view"
+        app:scrollbarStyle="insideOverlay"
+        />
 
 </LinearLayout>

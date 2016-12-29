@@ -101,7 +101,12 @@ public class AuthorActivity extends BaseActivity implements AuthorDetailContract
         //隐藏标题栏标题
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mAuthorTabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.white));
         mAuthorTabLayout.addTab(mAuthorTabLayout.newTab().setText("Tab1"));
         mAuthorTabLayout.addTab(mAuthorTabLayout.newTab().setText("Tab2"));

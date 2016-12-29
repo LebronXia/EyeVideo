@@ -56,6 +56,7 @@ public class SearchResultActivity extends BaseRVActivity<ItemList> implements Se
 
     }
 
+
     @Override
     public void showError() {
 

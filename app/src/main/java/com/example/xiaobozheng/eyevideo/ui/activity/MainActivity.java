@@ -92,16 +92,6 @@ public class MainActivity extends BaseActivity {
         //初始化Fragment
         initFragment(savedInstanceState);
 
-//        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-//            @Override
-//            public void onTabSelected(@IdRes int tabId) {
-//                if (tabId == R.id.tab_choice){
-//                    SwitchTo(0);
-//                } else if (tabId == R.id.tab_find){
-//                    SwitchTo(1);
-//                }
-//            }
-//        });
     }
 
     /**

@@ -46,7 +46,7 @@ public class MultipleItemAdapter extends RecyclerArrayAdapter<RecycleViewItemDat
                     Category category = (Category) item.getT();
                     holder.setText(R.id.tv_date,category.text);
                 }
-            } ;
+            };
         } else if (viewType == ITEM_TYPE.ITEM_TYPE_MOVIE.ordinal()){
             return new BaseViewHolder<RecycleViewItemData>(parent, R.layout.item_movie) {
                 @Override
@@ -91,10 +91,8 @@ public class MultipleItemAdapter extends RecyclerArrayAdapter<RecycleViewItemDat
         return mObjects.get(position).getDataType();
     }
 
-
-
     public enum ITEM_TYPE{
         ITEM_TYPE_DATE,
-        ITEM_TYPE_MOVIE;
+        ITEM_TYPE_MOVIE
     }
 }

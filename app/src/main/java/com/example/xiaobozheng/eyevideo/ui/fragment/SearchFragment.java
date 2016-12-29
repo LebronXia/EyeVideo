@@ -30,15 +30,13 @@ import rx.Observable;
  * Created by xiaobozheng on 12/20/2016.
  */
 
-public class SearchFragment extends BaseFragment implements SearchContract.View{
+public class SearchFragment extends BaseFragment{
 
     @Bind(R.id.fl_searchword)
     TagFlowLayout mTagFlowLayout;
-    private List<String> tags = new ArrayList<>();
-    private TagAdapter<String> mTagAdapter;
 
-    @Inject
-    SearchPresenter mSearchPresenter;
+
+
 
     @Override
     public int getLayoutResId() {
@@ -47,10 +45,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View{
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
-        DaggerMianVideoComponent.builder()
-                .appComponent(appComponent)
-                .build()
-                .inject(this);
+
     }
 
     @Override
@@ -61,29 +56,12 @@ public class SearchFragment extends BaseFragment implements SearchContract.View{
     @Override
     public void initView() {
 
-        mTagAdapter = new TagAdapter<String>(tags) {
-            @Override
-            public View getView(FlowLayout parent, int position, String data) {
-                TextView tag = (TextView) LayoutInflater.from(mContext).inflate(R.layout.item_tag, parent, false);
-                tag.setText(data);
-                return tag;
-            }
-        };
 
-        mTagFlowLayout.setOnTagClickListener((view, position, parent) -> {
-           // startResultActivity(tags.get(position));
-            RxBus.getInstance().post(tags.get(position));
-            return true;
-        });
-        mTagFlowLayout.setAdapter(mTagAdapter);
-        mSearchPresenter.getTrendingTags();
     }
 
     @Override
     public void attachView() {
-        if (mSearchPresenter != null){
-            mSearchPresenter.attachView(this);
-        }
+
     }
 
     @Override
@@ -101,22 +79,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View{
         }
     }
 
-    @Override
-    public void showTrendingTags(List<String> TrendingTags) {
-        if (TrendingTags == null || TrendingTags.size() < 0) return;
-            tags.addAll(TrendingTags);
-            mTagAdapter.notifyDataChanged();
-    }
 
-    @Override
-    public void showError() {
-
-    }
-
-    @Override
-    public void complete() {
-
-    }
 
 
 }

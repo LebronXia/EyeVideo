@@ -28,7 +28,7 @@ public interface MianVideoComponent {
 
     MainContentActivity inject(MainContentActivity mainContentActivity);
 
-    SearchFragment inject(SearchFragment searchFragment);
+    SearchActivity inject(SearchActivity searchActivity);
 
     AuthorActivity inject(AuthorActivity authorActivity);
 

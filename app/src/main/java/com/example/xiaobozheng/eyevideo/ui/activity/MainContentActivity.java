@@ -74,6 +74,7 @@ public class MainContentActivity extends BaseRVActivity<ItemList> implements Mai
         if (interestingLists == null || interestingLists.size() < 0) return;
         mInterestingLists.clear();
         if(isRefresh){
+            start = 0;
             mAdapter.clear();
         }
         mInterestingLists.addAll(interestingLists);

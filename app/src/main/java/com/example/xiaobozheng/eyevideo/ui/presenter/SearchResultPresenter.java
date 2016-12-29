@@ -28,27 +28,6 @@ public class SearchResultPresenter extends BaseRxPresenter<SearchResultContract.
 
     @Override
     public void getSearchResult(String key, int start) {
-        Subscription rxSubscription = mApi.queryByKey(key, start)
-                .map(searchResult -> searchResult.getItemList())
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<ItemList> >() {
-                    @Override
-                    public void onCompleted() {
-                        mView.complete();
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        mView.showError();
-                    }
-
-                    @Override
-                    public void onNext(List<ItemList> searchResults) {
-                        mView.showSearchResult(searchResults);
-                    }
-                });
-        addSubscrebe(rxSubscription);
     }
 }
