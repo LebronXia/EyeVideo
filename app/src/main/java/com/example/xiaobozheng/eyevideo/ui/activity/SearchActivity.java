@@ -122,14 +122,8 @@ public class SearchActivity extends BaseRVActivity<ItemList> implements SearchCo
             }
             return false;
         });
-
-//        observable.observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>(){
-//            @Override
-//            public void call(String s) {
-//                switchContent(s);
-//            }
-//        });
-
+        mEtSearch.requestFocus();
+        showKeyboard();
         //绑定流布局
         mTagAdapter = new TagAdapter<String>(tags) {
             @Override
@@ -191,7 +185,8 @@ public class SearchActivity extends BaseRVActivity<ItemList> implements SearchCo
     //软键盘的自动弹出
     private void showKeyboard(){
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.showSoftInput(mEtSearch, 0);
+        inputMethodManager.showSoftInput(mEtSearch,  InputMethodManager.SHOW_FORCED);
+       // inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
     @Override
