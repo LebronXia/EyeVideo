@@ -38,7 +38,6 @@ import rx.Observable;
 /**
  * Created by xiaobozheng on 12/16/2016.
  */
-
 public class SearchActivity extends BaseRVActivity<ItemList> implements SearchContract.View{
 
     public static final String KEYWORD = "keyword";
@@ -54,9 +53,6 @@ public class SearchActivity extends BaseRVActivity<ItemList> implements SearchCo
     FrameLayout mFlSearch;
     private List<String> tags = new ArrayList<>();
     private TagAdapter<String> mTagAdapter;
-    //当前Fragment
-    Fragment mSearchFragment;
-    Fragment mSearchResultFragment;
     private int start = 0;
     private String keyword;
 
@@ -123,7 +119,7 @@ public class SearchActivity extends BaseRVActivity<ItemList> implements SearchCo
             return false;
         });
         mEtSearch.requestFocus();
-        showKeyboard();
+        //showKeyboard();
         //绑定流布局
         mTagAdapter = new TagAdapter<String>(tags) {
             @Override
@@ -168,7 +164,7 @@ public class SearchActivity extends BaseRVActivity<ItemList> implements SearchCo
     //获得搜索结果
     @Override
     public void showSearchResult(List<ItemList> searchResults) {
-       // mAdapter.clear();
+       //mAdapter.clear();
         mAdapter.addAll(searchResults);
         mAdapter.notifyDataSetChanged();
         start += 10;
@@ -210,11 +206,11 @@ public class SearchActivity extends BaseRVActivity<ItemList> implements SearchCo
 
     }
 
-    public  void switchContent(String word){
-        Bundle args = new Bundle();
-        args.putString(KEYWORD, word);
-        mSearchResultFragment.setArguments(args);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, mSearchResultFragment).commitAllowingStateLoss();
-    }
+//    public  void switchContent(String word){
+//        Bundle args = new Bundle();
+//        args.putString(KEYWORD, word);
+//        mSearchResultFragment.setArguments(args);
+//
+//        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, mSearchResultFragment).commitAllowingStateLoss();
+//    }
 }
