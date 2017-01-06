@@ -112,8 +112,8 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewI
 
     @Override
     public void onItemClick(int position) {
-        RecycleViewItemData recycleViewItemData = mAdapter.getItem(position);
-        final ItemList itemList = (ItemList) recycleViewItemData.getT();
+       // RecycleViewItemData recycleViewItemData = mAdapter.getItem(position);
+       // final ItemList itemList = (ItemList) recycleViewItemData.getT();
 
     }
 }

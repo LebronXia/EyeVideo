@@ -4,6 +4,8 @@ import com.example.xiaobozheng.eyevideo.api.Api;
 import com.example.xiaobozheng.eyevideo.base.BaseRxPresenter;
 import com.example.xiaobozheng.eyevideo.model.Replies;
 import com.example.xiaobozheng.eyevideo.ui.contract.MovieDetailContract;
+import com.orhanobut.logger.Logger;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -42,6 +44,7 @@ public class MovieDetailPresenter extends BaseRxPresenter<MovieDetailContract.Vi
 
                     @Override
                     public void onError(Throwable e) {
+                        Logger.d(e.toString());
                         mView.showError();
                     }
 
