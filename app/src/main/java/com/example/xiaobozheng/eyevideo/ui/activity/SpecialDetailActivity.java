@@ -2,6 +2,7 @@ package com.example.xiaobozheng.eyevideo.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,9 +10,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -83,6 +86,8 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
     NestedScrollView mNestedScrollView;
     @Bind(R.id.ll_nestedScrollView)
     LinearLayout mLlNestedScrollView;
+    @Bind(R.id.toolbar_detail)
+    Toolbar mDetailToolbar;
 
     private ItemList mItemList;
     private GalleryPageAdapter mPageAdapter;
@@ -97,6 +102,9 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
     private HotLikedAdapter mHotLikedAdapter;
     private HotAuthorAdapter mHotAuthorAdapter;
 
+    private int height;
+    private int width;
+
     @Inject
     SpeicalDetailPresenter mSpeicalDetailPresenter;
 
@@ -107,7 +115,7 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("");
+        mDetailToolbar.setTitle("");
     }
 
     @Override
@@ -165,9 +173,37 @@ public class SpecialDetailActivity extends BaseActivity implements SpecialDetail
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                // Logger.d(getHeaderLinearlayout() + "LinearLayout的底部高度");
+
+                if (scrollY <= 0) {   //设置标题的背景颜色
+                    mDetailToolbar.setBackgroundColor(Color.argb((int) 0, 255,87,34));
+                } else if (scrollY > 0 && scrollY <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
+                    float scale = (float) scrollY / height;
+                    float alpha = (255 * scale);
+                    mTvToolBarTitle.setTextColor(Color.argb((int) alpha, 255,255,255));
+                    mDetailToolbar.setBackgroundColor(Color.argb((int) alpha, 255,87,34));
+                } else {    //滑动到banner下面设置普通颜色
+                    mDetailToolbar.setBackgroundColor(Color.argb((int) 255, 255,87,34));
+                }
             }
         });
         mSpeicalDetailPresenter.getSpecialDetailData(mItemList.data.id);
+        initListerners();
+
+    }
+
+    private void initListerners() {
+        ViewTreeObserver vto = mIvCategoryPic.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mTvToolBarTitle.getViewTreeObserver().removeGlobalOnLayoutListener(
+                        this);
+                height = mIvCategoryPic.getHeight();
+
+                //scrollView.setScrollViewListener(QQSpeakActivity.this);
+            }
+        });
+
     }
 
     @OnClick(R.id.rv_lately_content)

@@ -48,7 +48,18 @@
     </FrameLayout>
 
     <include layout="@layout/common_toolbar"
+            android:visibility="gone"
         />
+
+    <include layout="@layout/toolbar_detail"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+
+    </RelativeLayout>
 
     <!--<ImageButton-->
         <!--android:id="@+id/ib_back"-->
