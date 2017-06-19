@@ -1,14 +1,8 @@
 package com.example.xiaobozheng.eyevideo.ui.activity;
 
-import android.app.usage.UsageEvents;
 import android.content.Context;
-import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,24 +15,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.xiaobozheng.eyevideo.R;
-import com.example.xiaobozheng.eyevideo.base.BaseActivity;
 import com.example.xiaobozheng.eyevideo.base.BaseRVActivity;
 import com.example.xiaobozheng.eyevideo.injection.component.AppComponent;
 import com.example.xiaobozheng.eyevideo.injection.component.DaggerMianVideoComponent;
 import com.example.xiaobozheng.eyevideo.model.ItemList;
-import com.example.xiaobozheng.eyevideo.model.SearchResult;
 import com.example.xiaobozheng.eyevideo.ui.adapter.SearchResultAdapter;
 import com.example.xiaobozheng.eyevideo.ui.contract.SearchContract;
-import com.example.xiaobozheng.eyevideo.ui.fragment.SearchFragment;
-import com.example.xiaobozheng.eyevideo.ui.fragment.SearchResultFragment;
 import com.example.xiaobozheng.eyevideo.ui.presenter.SearchPresenter;
 import com.example.xiaobozheng.eyevideo.util.RxBus;
-import com.orhanobut.logger.Logger;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,17 +34,10 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-
-import static android.R.attr.data;
-import static android.R.attr.key;
-import static android.R.id.list;
 
 /**
  * Created by xiaobozheng on 12/16/2016.
  */
-
 public class SearchActivity extends BaseRVActivity<ItemList> implements SearchContract.View{
 
     public static final String KEYWORD = "keyword";
@@ -72,9 +53,6 @@ public class SearchActivity extends BaseRVActivity<ItemList> implements SearchCo
     FrameLayout mFlSearch;
     private List<String> tags = new ArrayList<>();
     private TagAdapter<String> mTagAdapter;
-    //当前Fragment
-    Fragment mSearchFragment;
-    Fragment mSearchResultFragment;
     private int start = 0;
     private String keyword;
 
@@ -140,14 +118,8 @@ public class SearchActivity extends BaseRVActivity<ItemList> implements SearchCo
             }
             return false;
         });
-
-//        observable.observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>(){
-//            @Override
-//            public void call(String s) {
-//                switchContent(s);
-//            }
-//        });
-
+        mEtSearch.requestFocus();
+        //showKeyboard();
         //绑定流布局
         mTagAdapter = new TagAdapter<String>(tags) {
             @Override
@@ -192,7 +164,7 @@ public class SearchActivity extends BaseRVActivity<ItemList> implements SearchCo
     //获得搜索结果
     @Override
     public void showSearchResult(List<ItemList> searchResults) {
-       // mAdapter.clear();
+       //mAdapter.clear();
         mAdapter.addAll(searchResults);
         mAdapter.notifyDataSetChanged();
         start += 10;
@@ -209,7 +181,8 @@ public class SearchActivity extends BaseRVActivity<ItemList> implements SearchCo
     //软键盘的自动弹出
     private void showKeyboard(){
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.showSoftInput(mEtSearch, 0);
+        inputMethodManager.showSoftInput(mEtSearch,  InputMethodManager.SHOW_FORCED);
+       // inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
     @Override
@@ -233,11 +206,11 @@ public class SearchActivity extends BaseRVActivity<ItemList> implements SearchCo
 
     }
 
-    public  void switchContent(String word){
-        Bundle args = new Bundle();
-        args.putString(KEYWORD, word);
-        mSearchResultFragment.setArguments(args);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, mSearchResultFragment).commitAllowingStateLoss();
-    }
+//    public  void switchContent(String word){
+//        Bundle args = new Bundle();
+//        args.putString(KEYWORD, word);
+//        mSearchResultFragment.setArguments(args);
+//
+//        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, mSearchResultFragment).commitAllowingStateLoss();
+//    }
 }

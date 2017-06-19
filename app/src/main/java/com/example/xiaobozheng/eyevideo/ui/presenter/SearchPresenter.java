@@ -29,6 +29,7 @@ public class SearchPresenter extends BaseRxPresenter<SearchContract.View> implem
     public SearchPresenter(Api api){
         this.mApi = api;
     }
+
     @Override
     public void getTrendingTags() {
         Subscription rxSubscription = mApi.getTrendingTag()

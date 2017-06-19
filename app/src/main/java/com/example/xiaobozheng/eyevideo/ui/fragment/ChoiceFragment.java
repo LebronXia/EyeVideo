@@ -30,7 +30,7 @@ import java.util.List;
 public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewItemData> implements ChoiceVideoContract.View{
 
     public static final String EXTRA_ITEM = "extra_item";
-    private List<RecycleViewItemData> mItems = new ArrayList<>();
+    private List<RecycleViewItemData> mItems =  new ArrayList<>();
     private String dateTime = "";
 
     @Override
@@ -54,7 +54,6 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewI
     @Override
     public void initView() {
         initAdapter(MultipleItemAdapter.class, true, true);
-
         onRefresh();
     }
 
@@ -100,6 +99,7 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewI
     @Override
     public void onLoadMore() {
         super.onLoadMore();
+        if (dateTime == "") return;
         mPresenter.getChoiceDailyData(Long.decode(dateTime), false);
     }
 
@@ -112,8 +112,8 @@ public class ChoiceFragment extends BaseRVFragment<ChoicePresenter, RecycleViewI
 
     @Override
     public void onItemClick(int position) {
-        RecycleViewItemData recycleViewItemData = mAdapter.getItem(position);
-        final ItemList itemList = (ItemList) recycleViewItemData.getT();
+       // RecycleViewItemData recycleViewItemData = mAdapter.getItem(position);
+       // final ItemList itemList = (ItemList) recycleViewItemData.getT();
 
     }
 }

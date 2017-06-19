@@ -90,6 +90,7 @@ public abstract class BaseRVFragment<T1 extends BaseContract.BasePresenter, T2> 
 
     @Override
     public void onLoadMore() {
+
     }
 
     @Override

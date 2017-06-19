@@ -2,6 +2,8 @@ package com.example.xiaobozheng.eyevideo.model;
 
 import java.util.List;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
+
 /**
  * Created by xiaobozheng on 12/2/2016.
  */
@@ -71,7 +73,7 @@ public class Replies {
         private long id;
         private int videoId;
         private String videoTitle;
-        private int parentReplyId;
+        private long parentReplyId;
         private int sequence;
         private String message;
         private String replyStatus;
@@ -105,11 +107,11 @@ public class Replies {
             this.videoTitle = videoTitle;
         }
 
-        public int getParentReplyId() {
+        public long getParentReplyId() {
             return parentReplyId;
         }
 
-        public void setParentReplyId(int parentReplyId) {
+        public void setParentReplyId(long parentReplyId) {
             this.parentReplyId = parentReplyId;
         }
 

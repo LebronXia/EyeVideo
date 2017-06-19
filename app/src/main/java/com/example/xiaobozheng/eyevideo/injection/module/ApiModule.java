@@ -1,14 +1,18 @@
 package com.example.xiaobozheng.eyevideo.injection.module;
 
-
 import com.example.xiaobozheng.eyevideo.api.Api;
-import com.example.xiaobozheng.eyevideo.app.Constant;
+import com.example.xiaobozheng.eyevideo.util.AppUtil;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 
 /**
@@ -16,6 +20,8 @@ import okhttp3.OkHttpClient;
  */
 @Module
 public class ApiModule {
+
+    private static String TAG= "factory";
 
     @Provides
     public OkHttpClient provideOkHttpClient(){
